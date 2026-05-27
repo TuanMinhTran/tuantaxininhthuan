@@ -24,7 +24,7 @@ export default function VietTaxiFooter() {
               <div className="flex h-10 w-10 items-center justify-center shadow-[0_0_20px_rgba(250,204,21,0.4)] rounded-lg bg-[var(--brand)] font-bold text-black">
                 <img
                   className="rounded-md"
-                  src="/image/png/logo-c.png"
+                  src="/public/image/png/logo-c.png"
                   alt="logo"
                 />
               </div>

@@ -31,7 +31,7 @@ export function VietTaxiNavbar() {
           <span className="grid h-10 w-10 place-items-center rounded-lg text-black font-extrabold text-sm shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-transform group-hover:scale-105">
             <img
               className="rounded-md"
-              src="/image/png/logo-c.png"
+              src="/public/image/png/logo-c.png"
               alt="logo"
             />
           </span>
