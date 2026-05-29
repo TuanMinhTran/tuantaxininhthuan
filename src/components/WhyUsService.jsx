@@ -43,10 +43,10 @@ export default function WhyUsService() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Left */}
           <div className="text-center md:text-left">
-            <p className="text-base md:text-lg font-semibold tracking-[0.2em] text-[var(--brand)]">
+            <p className="text-sm md:text-lg font-semibold tracking-[0.2em] text-[var(--brand)]">
               TẠI SAO CHỌN CHÚNG TÔI
             </p>
-            <h2 className="mt-4 text-xl md:text-3xl font-bold leading-tight text-foreground">
+            <h2 className="mt-4 text-lg md:text-3xl font-bold leading-tight text-foreground">
               Kinh nghiệm - Tận tâm - Chuyên nghiệp
             </h2>
             <p className="mt-6 max-w-xl text-white/60 leading-relaxed">

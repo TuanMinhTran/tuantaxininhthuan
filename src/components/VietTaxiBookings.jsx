@@ -6,7 +6,7 @@ export default function VietTaxiBookings() {
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[var(--brand)] to-[oklch(0.78_0.16_75)] p-10 md:p-14">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
             <div className="text-[var(--brand-foreground)]">
-              <h2 className="text-2xl md:text-3xl font-bold">
+              <h2 className="text-xl md:text-3xl font-bold">
                 ĐẶT XE NGAY HÔM NAY
               </h2>
               <p className="mt-4 max-w-xl text-[var(--brand-foreground)]/80">
