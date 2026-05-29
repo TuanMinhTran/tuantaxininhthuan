@@ -10,34 +10,38 @@ function Stat({ value, label }) {
 export default function VietTaxiServices() {
   return (
     <main className="min-h-screen bg-[var(--surface)] text-white">
-      <section className="mx-auto max-w-7xl px-10 pt-16 pb-20 lg:pt-30">
+      <section
+        id="home"
+        className="mx-auto max-w-7xl px-10 pt-16 pb-20 lg:pt-30"
+      >
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-10 items-center">
           {/* Left */}
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--brand)]/30 bg-[var(--surface-2)] px-4 py-2 text-sm text-[var(--brand)]">
+          <div className="text-center md:text-left">
+            <div className="inline-flex items-center gap-2 mt-6 md:mt-0 rounded-full border border-[var(--brand)]/30 bg-[var(--surface-2)] px-4 py-2 text-sm text-[var(--brand)]">
               <Star className="h-4 w-4 fill-[var(--brand)]" />
-              Du lịch - Taxi - Xe hợp đồng - Đám cưới
+              DU LỊCH - TAXI - XE HỢP ĐỒNG- ĐÁM CƯỚI
             </div>
-            <h1 className="mt-8 text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
-              Di chuyển <span className="text-[var(--brand)]">sang</span>
-              <br />
-              <span className="text-[var(--brand)]">trọng</span> và{" "}
-              <span className="text-[var(--brand)]">an toàn</span>
+            <h1 className="mt-8 text-5xl md:text-6xl lg:text-6xl font-bold leading-[1.05] tracking-tight">
+              Di chuyển <span className="text-[var(--brand)]">Nhanh Chóng</span>
+              <span> và </span>
+              <span className="text-[var(--brand)]">An Toàn</span>
             </h1>
             <p className="mt-8 max-w-xl text-lg text-white/60 leading-relaxed">
-              VietTaxi Premium mang đến trải nghiệm di chuyển đẳng cấp với đội
-              xe cao cấp, tài xế chuyên nghiệp và dịch vụ khách hàng tận tâm
-              24/7.
+              Taxi Ninh Thuận Premium mang đến trải nghiệm di chuyển tiện lợi
+              với đội xe cao cấp, tài xế chuyên nghiệp và dịch vụ khách hàng tận
+              tâm 24/7.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <button className="inline-flex items-center gap-2 rounded-xl bg-[var(--brand)] px-6 py-3.5 font-semibold text-[var(--brand-foreground)] transition hover:brightness-110">
-                Đặt xe ngay <ArrowRight className="h-4 w-4" />
-              </button>
+            <div className="mt-10 flex flex-wrap gap-4 justify-center md:justify-start">
+              <a href="#booking">
+                <button className="inline-flex items-center gap-2 rounded-xl bg-[var(--brand)] px-6 py-3.5 font-semibold text-[var(--brand-foreground)] transition hover:brightness-110">
+                  Đặt xe ngay <ArrowRight className="h-4 w-4" />
+                </button>
+              </a>
               <button className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-6 py-3.5 font-semibold text-white transition hover:bg-[var(--brand)] hover:text-black">
                 <Phone className="h-4 w-4" /> Gọi 0827 524 105
               </button>
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm text-white/70">
+            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm text-white/70 justify-center md:justify-start">
               <div className="inline-flex items-center gap-2">
                 <Shield className="h-4 w-4 text-[var(--brand)]" /> Bảo hiểm đầy
                 đủ

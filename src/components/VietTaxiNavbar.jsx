@@ -6,7 +6,7 @@ const links = [
   { href: "#home", label: "Trang chủ" },
   { href: "#booking", label: "Đặt xe" },
   { href: "#pricing", label: "Bảng giá" },
-  { href: "#contact", label: "Liên hệ" },
+  { href: "#booking", label: "Liên hệ" },
 ];
 export function VietTaxiNavbar() {
   const [scrolled, setScrolled] = useState(false);

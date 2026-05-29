@@ -1,13 +1,13 @@
 import { Phone, ArrowRight } from "lucide-react";
 export default function VietTaxiBookings() {
   return (
-    <section className="bg-[var(--surface)] py-16">
+    <section id="booking" className="bg-[var(--surface)] py-16">
       <div className="mx-auto max-w-7xl px-10">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[var(--brand)] to-[oklch(0.78_0.16_75)] p-10 md:p-14">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
             <div className="text-[var(--brand-foreground)]">
-              <h2 className="text-3xl md:text-4xl font-bold">
-                Đặt xe ngay hôm nay
+              <h2 className="text-2xl md:text-3xl font-bold">
+                ĐẶT XE NGAY HÔM NAY
               </h2>
               <p className="mt-4 max-w-xl text-[var(--brand-foreground)]/80">
                 Gọi hotline hoặc đặt xe trực tuyến để được phục vụ nhanh chóng.
@@ -33,7 +33,7 @@ export default function VietTaxiBookings() {
                 0827 524 105
               </p>
               <p className="mt-2 text-xs text-[var(--brand-foreground)]/70">
-                Miễn phí cuộc gọi
+                Tư Vấn Miễn Phí
               </p>
             </div>
           </div>

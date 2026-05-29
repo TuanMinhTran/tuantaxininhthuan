@@ -34,7 +34,7 @@ export default function VietTaxiFooter() {
             </div>
             <p className="mt-5 text-sm leading-relaxed text-white/60">
               Dịch vụ taxi cao cấp hàng đầu Việt Nam. Chúng tôi cam kết mang đến
-              trải nghiệm di chuyển an toàn, thoải mái và đẳng cấp.
+              trải nghiệm di chuyển an toàn, thoải mái và nhanh chóng.
             </p>
           </div>
           <div>
@@ -54,9 +54,7 @@ export default function VietTaxiFooter() {
             <ul className="mt-5 space-y-3 text-sm text-white/60">
               {serviceLinks.map((link) => (
                 <li key={link.label}>
-                  <span>
-                    {link.label}
-                  </span>
+                  <span>{link.label}</span>
                 </li>
               ))}
             </ul>
