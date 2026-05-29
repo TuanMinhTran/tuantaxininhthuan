@@ -61,7 +61,7 @@ export default function VietTaxiFooter() {
           </div>
           <div>
             <h4 className="font-semibold">Liên hệ</h4>
-            <ul className="mt-5 space-y-4 text-sm text-white/60">
+            <ul className="mt-5 space-y-4 text-xs md:text-sm text-white/60">
               <li className="flex items-start gap-3">
                 <Phone className="mt-0.5 h-4 w-4 text-[var(--brand)]" />
                 <a href="#" className="hover:text-[var(--brand)]">
@@ -81,7 +81,7 @@ export default function VietTaxiFooter() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/50">
+        <div className="mt-12 border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs md:text-sm text-white/50">
           <p>© 2026 TAXI Ninh Thuận. Tất cả quyền được bảo lưu.</p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-[var(--brand)]">

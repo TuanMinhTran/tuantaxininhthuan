@@ -17,9 +17,9 @@ export default function VietTaxiServices() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-10 items-center">
           {/* Left */}
           <div className="text-center md:text-left">
-            <div className="inline-flex items-center gap-2 mt-6 md:mt-0 rounded-full border border-[var(--brand)]/30 bg-[var(--surface-2)] px-4 py-2 text-sm text-[var(--brand)]">
+            <div className="inline-flex items-center gap-2 mt-6 md:mt-0 rounded-full border border-[var(--brand)]/30 bg-[var(--surface-2)] px-4 py-2 text-xs md:text-sm text-[var(--brand)]">
               <Star className="h-4 w-4 fill-[var(--brand)]" />
-              DU LỊCH - TAXI - XE HỢP ĐỒNG- ĐÁM CƯỚI
+              DU LỊCH - TAXI - XE HỢP ĐỒNG - ĐÁM CƯỚI
             </div>
             <h1 className="mt-8 text-5xl md:text-6xl lg:text-6xl font-bold leading-[1.05] tracking-tight">
               Di chuyển <span className="text-[var(--brand)]">Nhanh Chóng</span>
@@ -37,9 +37,11 @@ export default function VietTaxiServices() {
                   Đặt xe ngay <ArrowRight className="h-4 w-4" />
                 </button>
               </a>
-              <button className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-6 py-3.5 font-semibold text-white transition hover:bg-[var(--brand)] hover:text-black">
-                <Phone className="h-4 w-4" /> Gọi 0827 524 105
-              </button>
+              <a href="tel:0827524105">
+                <button className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-6 py-3.5 font-semibold text-white transition hover:bg-[var(--brand)] hover:text-black">
+                  <Phone className="h-4 w-4" /> Gọi 0827 524 105
+                </button>
+              </a>
             </div>
             <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm text-white/70 justify-center md:justify-start">
               <div className="inline-flex items-center gap-2">

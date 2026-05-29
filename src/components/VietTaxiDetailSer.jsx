@@ -27,10 +27,10 @@ export default function VietTaxiDetailSer() {
     <section className="bg-[var(--surface-2)] text-white py-20">
       <div className="mx-auto max-w-7xl px-10">
         <div className="text-center">
-          <p className="text-sm md:text-lg font-semibold tracking-[0.2em] text-[var(--brand)]">
+          <p className="text-xs md:text-lg font-semibold tracking-[0.2em] text-[var(--brand)]">
             DỊCH VỤ CỦA CHÚNG TÔI
           </p>
-          <h2 className="mt-4 text-lg md:text-3xl font-bold text-foreground">
+          <h2 className="mt-4 text-base md:text-3xl font-bold text-foreground">
             Giải Pháp Di Chuyển An toàn - Toàn Diện
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-foreground/60">

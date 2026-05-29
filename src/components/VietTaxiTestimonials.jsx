@@ -57,10 +57,10 @@ export default function VietTaxiTestimonials() {
     <section className="bg-[var(--surface-2)] text-white py-20">
       <div className="max-w-7xl mx-auto px-10">
         <div className="text-center mb-14">
-          <div className="text-sm md:text-lg font-bold tracking-[0.2em] text-[var(--brand)] mb-4">
+          <div className="text-xs md:text-lg font-bold tracking-[0.2em] text-[var(--brand)] mb-4">
             ĐÁNH GIÁ KHÁCH HÀNG
           </div>
-          <h2 className="text-lg md:text-3xl font-bold text-white mb-4">
+          <h2 className="text-base md:text-3xl font-bold text-white mb-4">
             Khách Hàng Nói Gì Về Chúng Tôi ?
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto">

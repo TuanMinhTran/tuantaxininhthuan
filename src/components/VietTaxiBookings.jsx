@@ -14,28 +14,32 @@ export default function VietTaxiBookings() {
                 Đội ngũ của chúng tôi luôn sẵn sàng hỗ trợ bạn 24/7.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <button className="inline-flex items-center gap-2 rounded-xl bg-black px-6 py-3.5 font-semibold text-white transition hover:bg-black/90">
-                  <Phone className="h-4 w-4" /> Gọi 0827 524 105
-                </button>
+                <a href="tel:0827524105">
+                  <button className="inline-flex items-center gap-2 rounded-xl bg-black px-6 py-3.5 font-semibold text-white transition hover:bg-black/90">
+                    <Phone className="h-4 w-4" /> Gọi 0827 524 105
+                  </button>
+                </a>
                 <button className="inline-flex items-center gap-2 rounded-xl bg-black px-6 py-3.5 font-semibold text-white transition hover:text-[var(--brand)]">
                   Đặt xe online <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
             </div>
-            <div className="rounded-2xl border border-[var(--brand-foreground)]/20 bg-[var(--brand-foreground)]/10 p-8 text-center backdrop-blur-sm">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--brand-foreground)]/20">
-                <Phone className="h-7 w-7 text-[var(--brand-foreground)]" />
+            <a href="tel:0827524105">
+              <div className="rounded-2xl border border-[var(--brand-foreground)]/20 bg-[var(--brand-foreground)]/10 p-8 text-center backdrop-blur-sm">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--brand-foreground)]/20">
+                  <Phone className="h-7 w-7 text-[var(--brand-foreground)]" />
+                </div>
+                <p className="mt-4 text-sm text-[var(--brand-foreground)]/70">
+                  Hotline 24/7
+                </p>
+                <p className="mt-1 text-2xl md:text-3xl font-bold text-[var(--brand-foreground)]">
+                  0827 524 105
+                </p>
+                <p className="mt-2 text-xs text-[var(--brand-foreground)]/70">
+                  Tư Vấn Miễn Phí
+                </p>
               </div>
-              <p className="mt-4 text-sm text-[var(--brand-foreground)]/70">
-                Hotline 24/7
-              </p>
-              <p className="mt-1 text-3xl font-bold text-[var(--brand-foreground)]">
-                0827 524 105
-              </p>
-              <p className="mt-2 text-xs text-[var(--brand-foreground)]/70">
-                Tư Vấn Miễn Phí
-              </p>
-            </div>
+            </a>
           </div>
         </div>
       </div>
