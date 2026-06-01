@@ -1,5 +1,6 @@
 import { Phone, ArrowRight } from "lucide-react";
-export default function VietTaxiBookings() {
+
+export default function VietTaxiBookings({ setOpenBooking }) {
   return (
     <section id="booking" className="bg-[var(--surface)] py-16">
       <div className="mx-auto max-w-7xl px-10">
@@ -19,7 +20,10 @@ export default function VietTaxiBookings() {
                     <Phone className="h-4 w-4" /> Gọi 0827 524 105
                   </button>
                 </a>
-                <button className="inline-flex items-center gap-2 rounded-xl bg-black px-6 py-3.5 font-semibold text-white transition hover:text-[var(--brand)]">
+                <button
+                  onClick={() => setOpenBooking(true)}
+                  className="inline-flex items-center gap-2 rounded-xl bg-black px-6 py-3.5 font-semibold text-white transition hover:text-[var(--brand)]"
+                >
                   Đặt xe online <ArrowRight className="h-4 w-4" />
                 </button>
               </div>

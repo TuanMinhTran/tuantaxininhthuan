@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { MessageCircle, X } from "lucide-react";
+
 export function ZaloContactButton({
   zaloId,
   qrImageUrl,
   label = "Quét mã để chat Zalo",
 }) {
   const [open, setOpen] = useState(false);
+  const [showHint, setShowHint] = useState(true);
   const popoverRef = useRef(null);
   const zaloLink = `https://zalo.me/${zaloId}`;
   const qrSrc =
@@ -13,6 +15,7 @@ export function ZaloContactButton({
     `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(
       zaloLink
     )}`;
+
   useEffect(() => {
     if (!open) return;
     const handler = (e) => {
@@ -23,6 +26,19 @@ export function ZaloContactButton({
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, [open]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowHint(true);
+
+      setTimeout(() => {
+        setShowHint(false);
+      }, 3000);
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="fixed bottom-6 right-6 z-50" ref={popoverRef}>
       {open && (
@@ -50,15 +66,31 @@ export function ZaloContactButton({
           </a>
         </div>
       )}
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#0068FF] text-white shadow-lg shadow-blue-500/40 transition-transform hover:scale-110"
-        aria-label="Liên hệ Zalo"
-      >
-        <span className="absolute inset-0 animate-ping rounded-full bg-[#0068FF] opacity-30" />
-        <MessageCircle className="h-7 w-7 fill-white" strokeWidth={0} />
-        <span className="absolute -right-1 -top-1 h-3.5 w-3.5 rounded-full bg-yellow-400" />
-      </button>
+      <div className="relative flex items-center">
+        {/* Hint text */}
+        <div
+          className={`absolute right-16 whitespace-nowrap rounded-full bg-white px-4 py-2 text-sm font-medium text-[#d7a200] shadow-lg transition-all duration-500 ${
+            showHint
+              ? "translate-x-0 opacity-100"
+              : "translate-x-4 opacity-0 pointer-events-none"
+          }`}
+        >
+          Quét mã liên hệ Zalo tư vấn miễn phí
+        </div>
+
+        {/* Zalo button */}
+        <button
+          onClick={() => setOpen((v) => !v)}
+          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#0068FF] text-white shadow-lg shadow-blue-500/40 transition-transform hover:scale-110"
+          aria-label="Liên hệ Zalo"
+        >
+          <span className="absolute inset-0 animate-ping rounded-full bg-[#0068FF] opacity-30" />
+
+          <MessageCircle className="h-7 w-7 fill-white" strokeWidth={0} />
+
+          <span className="absolute -right-1 -top-1 h-3.5 w-3.5 rounded-full bg-yellow-400" />
+        </button>
+      </div>
     </div>
   );
 }

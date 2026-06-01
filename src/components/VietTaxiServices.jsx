@@ -71,7 +71,7 @@ export default function VietTaxiServices() {
                   </div>
                   <h3 className="mt-6 text-2xl font-bold">TAXI Ninh Thuận</h3>
                   <p className="mt-1 text-white/60">
-                    Đẳng cấp trong từng chuyến đi
+                    Tiện lợi trong từng chuyến đi
                   </p>
                 </div>
               </div>
