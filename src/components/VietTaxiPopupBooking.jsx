@@ -184,13 +184,13 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
               className={inputCls}
             />
           </Field>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <Field label="Ngày đi">
               <input
                 type="date"
                 value={form.date}
                 onChange={(e) => update("date", e.target.value)}
-                className={`${inputCls} cursor-pointer`}
+                className={`${inputCls} cursor-pointer w-full`}
                 onClick={(e) => e.target.showPicker?.()}
               />
             </Field>
@@ -199,7 +199,7 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
                 type="time"
                 value={form.time}
                 onChange={(e) => update("time", e.target.value)}
-                className={`${inputCls} cursor-pointer`}
+                className={`${inputCls} cursor-pointer w-full`}
                 onClick={(e) => e.target.showPicker?.()}
               />
             </Field>
@@ -269,7 +269,7 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
 }
 /* ---------- helpers ---------- */
 const inputCls =
-  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition";
+  "w-full rounded-lg appearance-none border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition";
 function Field({ label, children }) {
   return (
     <label className="block">
