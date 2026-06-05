@@ -64,13 +64,18 @@ export default function VietTaxiFooter() {
             <ul className="mt-5 space-y-4 text-xs md:text-sm text-white/60">
               <li className="flex items-start gap-3">
                 <Phone className="mt-0.5 h-4 w-4 text-[var(--brand)]" />
-                <a href="#" className="hover:text-[var(--brand)]">
+                <a href="tel:0827524105" className="hover:text-[var(--brand)]">
                   Hotline: 0827 524 105
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 text-[var(--brand)]" />
-                <a href="#" className="hover:text-[var(--brand)]">
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=tranminhtuan1002@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[var(--brand)]"
+                >
                   tranminhtuan1002@gmail.com
                 </a>
               </li>
@@ -82,7 +87,7 @@ export default function VietTaxiFooter() {
           </div>
         </div>
         <div className="mt-12 border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs md:text-sm text-white/50">
-          <p>© 2026 TAXI Ninh Thuận. Tất cả quyền được bảo lưu.</p>
+          <p>© 2026 TAXI Phan Rang - KH. Tất cả quyền được bảo lưu.</p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-[var(--brand)]">
               Điều khoản sử dụng

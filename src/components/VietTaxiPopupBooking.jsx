@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { addBooking } from "../lib/bookings";
 
 export default function BookingPopup({ open, onClose, onSubmit }) {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const initialForm = {
     name: "",
     phone: "",
@@ -10,7 +12,7 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
     dropoff: "",
     date: "",
     time: "",
-    vehicle: "4-cho",
+    vehicle: "7-cho",
     tripType: "1-chieu",
     note: "",
   };
@@ -19,6 +21,7 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
 
   const handleClose = () => {
     setError("");
+    setSuccess("");
     setForm(initialForm);
     onClose?.();
   };
@@ -36,9 +39,13 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
   }, [open, handleClose]);
   if (!open) return null;
   const update = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setError("");
+    setSuccess("");
+
     if (
       !form.name.trim() ||
       !form.phone.trim() ||
@@ -48,26 +55,33 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
       setError("Vui lòng điền đầy đủ thông tin bắt buộc (*)");
       return;
     }
+
     if (!/^[0-9+\-\s]{8,15}$/.test(form.phone.trim())) {
       setError("Số điện thoại không hợp lệ");
       return;
     }
+
     setSubmitting(true);
+
     setTimeout(() => {
-      setSubmitting(false);
-      onSubmit?.(form);
-      handleClose?.();
-      setForm({
-        name: "",
-        phone: "",
-        pickup: "",
-        dropoff: "",
-        date: "",
-        time: "",
-        vehicle: "4-cho",
-        tripType: "1-chieu",
-        note: "",
-      });
+      try {
+        addBooking(form);
+
+        setSubmitting(false);
+
+        setSuccess("Đặt xe thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.");
+
+        setForm(initialForm);
+
+        setTimeout(() => {
+          onSubmit?.(form);
+          handleClose();
+        }, 2000);
+      } catch (err) {
+        setSubmitting(false);
+
+        setError("Có lỗi xảy ra khi gửi yêu cầu. Vui lòng thử lại.");
+      }
     }, 600);
   };
   return (
@@ -142,6 +156,11 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
               {error}
             </div>
           )}
+          {success && (
+            <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-2 text-sm text-green-700">
+              {success}
+            </div>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Field label="Họ và tên *">
               <input
@@ -211,8 +230,8 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
                 onChange={(e) => update("vehicle", e.target.value)}
                 className={`${inputCls} cursor-pointer`}
               >
-                <option value="4-cho">Xe 4 chỗ</option>
                 <option value="7-cho">Xe 7 chỗ</option>
+                <option value="4-cho">Xe 4 chỗ</option>
               </select>
             </Field>
             <Field label="Loại chuyến">

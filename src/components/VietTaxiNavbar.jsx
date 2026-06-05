@@ -36,7 +36,7 @@ export function VietTaxiNavbar() {
             />
           </span>
           <span className="font-bold text-xl tracking-wide text-white">
-            TAXI <span className="text-yellow-400">Ninh Thuận</span>
+            TAXI <span className="text-yellow-400">Phan Rang - KH</span>
           </span>
         </a>
         {/* Desktop nav links */}
