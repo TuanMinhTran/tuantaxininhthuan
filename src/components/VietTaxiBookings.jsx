@@ -2,7 +2,7 @@ import { Phone, ArrowRight } from "lucide-react";
 
 export default function VietTaxiBookings({ setOpenBooking }) {
   return (
-    <section id="booking" className="bg-[var(--surface)] py-16">
+    <section id="booking" className="bg-[var(--surface)] py-16 scroll-mt-16">
       <div className="mx-auto max-w-7xl px-10">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[var(--brand)] to-[oklch(0.78_0.16_75)] p-10 md:p-14">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">

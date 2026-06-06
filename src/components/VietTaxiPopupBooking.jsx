@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { addBooking } from "../lib/bookings";
 
-export default function BookingPopup({ open, onClose, onSubmit }) {
+export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const initialForm = {
     name: "",
     phone: "",
@@ -21,7 +20,6 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
 
   const handleClose = () => {
     setError("");
-    setSuccess("");
     setForm(initialForm);
     onClose?.();
   };
@@ -44,7 +42,6 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
     e.preventDefault();
 
     setError("");
-    setSuccess("");
 
     if (
       !form.name.trim() ||
@@ -69,18 +66,23 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
 
         setSubmitting(false);
 
-        setSuccess("Đặt xe thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.");
+        setToast({
+          type: "success",
+          message: "Đặt xe thành công! Chúng tôi sẽ liên hệ sớm nhất.",
+        });
 
-        setForm(initialForm);
+        onSubmit?.(form);
 
-        setTimeout(() => {
-          onSubmit?.(form);
-          handleClose();
-        }, 2000);
+        handleClose();
+
       } catch (err) {
         setSubmitting(false);
 
-        setError("Có lỗi xảy ra khi gửi yêu cầu. Vui lòng thử lại.");
+        setToast({
+          type: "error",
+          message: "Có lỗi xảy ra. Vui lòng thử lại.",
+        });
+
       }
     }, 600);
   };
@@ -154,11 +156,6 @@ export default function BookingPopup({ open, onClose, onSubmit }) {
           {error && (
             <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
               {error}
-            </div>
-          )}
-          {success && (
-            <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-2 text-sm text-green-700">
-              {success}
             </div>
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

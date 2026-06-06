@@ -28,7 +28,7 @@ export function VietTaxiNavbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-10 py-3">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-3 group">
-          <span className="grid h-10 w-10 place-items-center rounded-lg text-black font-extrabold text-sm shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-transform group-hover:scale-105">
+          <span className="grid h-10 w-10 place-items-center rounded-md text-black font-extrabold text-sm border border-[var(--brand)] shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-transform group-hover:scale-105">
             <img
               className="rounded-md"
               src="/image/png/logo-c.png"

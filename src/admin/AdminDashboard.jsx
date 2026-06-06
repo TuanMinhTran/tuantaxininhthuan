@@ -38,11 +38,11 @@ function Sidebar({ count }) {
   return (
     <aside className="flex h-full w-64 flex-col border-r border-white/5 bg-[var(--surface)] p-6">
       <Link to="/" className="flex items-center gap-2">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--brand)] font-bold text-[var(--brand-foreground)]">
-          VT
+        <div className="flex h-10 w-10 items-center justify-center rounded-md font-bold text-[var(--brand-foreground)] border border-[var(--brand)] shadow-[0_0_20px_rgba(250,204,21,0.4)]">
+          <img className="rounded-md" src="/image/png/logo-c.png" alt="logo" />
         </div>
         <div>
-          <div className="font-bold">VietTaxi</div>
+          <div className="font-bold">TAXI Phan Rang - KH</div>
           <div className="text-xs text-foreground/50">Admin Panel</div>
         </div>
       </Link>
@@ -123,7 +123,7 @@ export default function AdminDashboard() {
             >
               <Menu className="h-5 w-5" />
             </button>
-            <h1 className="text-lg font-bold lg:text-xl">Quản lý đặt xe</h1>
+            <h1 className="text-lg font-bold lg:text-xl">Quản Lý Đặt Xe</h1>
             <button
               onClick={markAllSeen}
               className="relative ml-auto rounded-xl border border-white/10 p-2.5 hover:bg-white/5"
@@ -152,27 +152,27 @@ export default function AdminDashboard() {
               <Select value={status} onValueChange={setStatus}>
                 <SelectTrigger
                   className="
-      w-[220px]
-      h-12
-      p-[22px]
+                      w-[220px]
+                      h-12
+                      p-[22px]
 
-      rounded-xl
-      border border-white/10
-      bg-[var(--surface)]
+                      rounded-xl
+                      border border-white/10
+                      bg-[var(--surface)]
 
-      px-4
-      text-sm
-      text-white
+                      px-4
+                      text-sm
+                      text-white
 
-      transition-all duration-200
+                      transition-all duration-200
 
-      hover:border-[var(--brand)]
-      hover:bg-white/5
+                      hover:border-[var(--brand)]
+                      hover:bg-white/5
 
-      focus:border-[var(--brand)]
-      focus:ring-0
-      focus:ring-offset-0
-    "
+                      focus:border-[var(--brand)]
+                      focus:ring-0
+                      focus:ring-offset-0
+                  "
                 >
                   <SelectValue placeholder="Tất cả trạng thái" />
                 </SelectTrigger>
@@ -182,15 +182,15 @@ export default function AdminDashboard() {
                   align="start"
                   sideOffset={6}
                   className="
-      w-[220px]
+                    w-[220px]
 
-      rounded-xl
-      border border-white/10
-      bg-[#111]
-      text-white
+                    rounded-xl
+                    border border-white/10
+                    bg-[#111]
+                    text-white
 
-      overflow-hidden
-    "
+                    overflow-hidden
+                  "
                 >
                   <SelectItem value="all">Tất cả trạng thái</SelectItem>
 
@@ -199,15 +199,15 @@ export default function AdminDashboard() {
                       key={k}
                       value={k}
                       className="
-          cursor-pointer
-          transition-colors
+                        cursor-pointer
+                        transition-colors
 
-          hover:bg-[var(--brand)]
-          hover:text-black
+                        hover:bg-[var(--brand)]
+                        hover:text-black
 
-          focus:bg-[var(--brand)]
-          focus:text-black
-        "
+                        focus:bg-[var(--brand)]
+                        focus:text-black
+                      "
                     >
                       {v}
                     </SelectItem>

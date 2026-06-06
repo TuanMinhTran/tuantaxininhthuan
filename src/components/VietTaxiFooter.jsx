@@ -21,7 +21,7 @@ export default function VietTaxiFooter() {
         <div className="grid gap-10 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center shadow-[0_0_20px_rgba(250,204,21,0.4)] rounded-lg bg-[var(--brand)] font-bold text-black">
+              <div className="flex h-10 w-10 items-center justify-center border border-[var(--brand)] shadow-[0_0_20px_rgba(250,204,21,0.4)] rounded-md bg-[var(--brand)] font-bold text-black">
                 <img
                   className="rounded-md"
                   src="/image/png/logo-c.png"
