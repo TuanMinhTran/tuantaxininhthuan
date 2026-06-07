@@ -215,32 +215,64 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
                 type="time"
                 value={form.time}
                 onChange={(e) => update("time", e.target.value)}
-                className={`${inputCls} cursor-pointer w-full`}
+                className={`${inputCls} w-full`}
                 onClick={(e) => e.target.showPicker?.()}
               />
             </Field>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Field label="Loại xe">
-              <select
-                value={form.vehicle}
-                onChange={(e) => update("vehicle", e.target.value)}
-                className={`${inputCls} cursor-pointer`}
-              >
-                <option value="7-cho">Xe 7 chỗ</option>
-                <option value="4-cho">Xe 4 chỗ</option>
-              </select>
+              <div className="relative">
+                <select
+                  value={form.vehicle}
+                  onChange={(e) => update("vehicle", e.target.value)}
+                  className={`${selectCls} appearance-none`}
+                >
+                  <option value="7-cho">Xe 7 chỗ</option>
+                  <option value="4-cho">Xe 4 chỗ</option>
+                </select>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
             </Field>
             <Field label="Loại chuyến">
-              <select
-                value={form.tripType}
-                onChange={(e) => update("tripType", e.target.value)}
-                className={`${inputCls} cursor-pointer`}
-              >
-                <option value="1-chieu">Một chiều</option>
-                <option value="khu-hoi">Khứ hồi</option>
-                <option value="theo-ngay">Thuê theo ngày</option>
-              </select>
+              <div className="relative">
+                <select
+                  value={form.tripType}
+                  onChange={(e) => update("tripType", e.target.value)}
+                  className={`${selectCls} appearance-none`}
+                >
+                  <option value="1-chieu">Một chiều</option>
+                  <option value="khu-hoi">Khứ hồi</option>
+                  <option value="theo-ngay">Thuê theo ngày</option>
+                </select>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
             </Field>
           </div>
           <Field label="Ghi chú">
@@ -285,8 +317,12 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
 }
 /* ---------- helpers ---------- */
 const inputCls =
-  "w-full rounded-lg appearance-none border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition";
-function Field({ label, children }) {
+  "w-full rounded-lg appearance-none border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition cursor-pointer";
+
+const selectCls =
+  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 pr-10 text-sm text-gray-900 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition cursor-pointer";
+
+  function Field({ label, children }) {
   return (
     <label className="block">
       <span className="mb-1 block text-sm font-medium text-white-700">
