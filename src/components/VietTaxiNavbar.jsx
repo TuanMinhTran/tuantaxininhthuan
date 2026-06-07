@@ -79,7 +79,7 @@ export function VietTaxiNavbar() {
       </nav>
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden mx-4 mb-3 rounded-xl bg-black/90 backdrop-blur-md border border-yellow-400/20 p-4">
+        <div className="absolute top-full left-0 right-0 z-50 md:hidden mx-4 mb-3 rounded-xl bg-black/90 backdrop-blur-md border border-yellow-400/20 p-4">
           <ul className="flex flex-col gap-1">
             {links.map((l) => (
               <li key={l.href}>

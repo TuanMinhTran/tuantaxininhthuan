@@ -247,7 +247,7 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
             <textarea
               value={form.note}
               onChange={(e) => update("note", e.target.value)}
-              placeholder="Yêu cầu thêm (nếu có)"
+              placeholder="Ghi chú ngày thuê/Yêu cầu thêm (nếu có)"
               maxLength={500}
               rows={3}
               className={`${inputCls} resize-none`}
