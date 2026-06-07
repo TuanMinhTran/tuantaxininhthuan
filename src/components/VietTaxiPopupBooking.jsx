@@ -166,7 +166,7 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
                 onChange={(e) => update("name", e.target.value)}
                 placeholder="Nguyễn Văn A"
                 maxLength={100}
-                className={inputCls}
+                className={`${inputCls} cursor-text`}
               />
             </Field>
             <Field label="Số điện thoại *">
@@ -176,7 +176,7 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
                 onChange={(e) => update("phone", e.target.value)}
                 placeholder="0393 939 393"
                 maxLength={15}
-                className={inputCls}
+                className={`${inputCls} cursor-text`}
               />
             </Field>
           </div>
@@ -202,22 +202,54 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
           </Field>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <Field label="Ngày đi">
-              <input
-                type="date"
-                value={form.date}
-                onChange={(e) => update("date", e.target.value)}
-                className={`${inputCls} cursor-pointer w-full`}
-                onClick={(e) => e.target.showPicker?.()}
-              />
+              <div className="relative">
+                <input
+                  type="date"
+                  value={form.date}
+                  onChange={(e) => update("date", e.target.value)}
+                  className={`${inputCls} w-full md:pr-3 pr-10 text-gray-500`}
+                  onClick={(e) => e.target.showPicker?.()}
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500 md:hidden"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 7V3m8 4V3m-9 8h10m-13 9h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v11a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
             </Field>
             <Field label="Giờ đón">
-              <input
-                type="time"
-                value={form.time}
-                onChange={(e) => update("time", e.target.value)}
-                className={`${inputCls} w-full`}
-                onClick={(e) => e.target.showPicker?.()}
-              />
+              <div className="relative">
+                <input
+                  type="time"
+                  value={form.time}
+                  onChange={(e) => update("time", e.target.value)}
+                  className={`${inputCls} w-full md:pr-3 pr-10 text-gray-500`}
+                  onClick={(e) => e.target.showPicker?.()}
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500 md:hidden"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
             </Field>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -282,7 +314,7 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
               placeholder="Ghi chú ngày thuê/Yêu cầu thêm (nếu có)"
               maxLength={500}
               rows={3}
-              className={`${inputCls} resize-none`}
+              className={`${inputCls} resize-none cursor-text`}
             />
           </Field>
           {/* Footer actions */}
