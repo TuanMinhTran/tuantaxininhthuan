@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const links = [
-  { href: "#home", label: "Trang chủ" },
-  { href: "#booking", label: "Đặt xe" },
-  { href: "#pricing", label: "Bảng giá" },
-  { href: "#booking", label: "Liên hệ" },
-];
-export function VietTaxiNavbar() {
+export function VietTaxiNavbar({ setOpenPricing }) {
+  const links = [
+    { href: "#home", label: "Trang chủ" },
+    { href: "#booking", label: "Đặt xe" },
+    { label: "Bảng giá", action: () => setOpenPricing(true) },
+    { href: "#booking", label: "Liên hệ" },
+  ];
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -43,12 +43,21 @@ export function VietTaxiNavbar() {
         <ul className="hidden md:flex items-center gap-10 text-base font-medium text-gray-300">
           {links.map((l) => (
             <li key={l.href}>
-              <a
-                href={l.href}
-                className="relative py-2 transition-colors hover:text-yellow-400 after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0 after:bg-yellow-400 after:transition-all hover:after:w-full"
-              >
-                {l.label}
-              </a>
+              {l.action ? (
+                <button
+                  onClick={l.action}
+                  className="relative py-2 cursor-pointer transition-colors hover:text-yellow-400 after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0 after:bg-yellow-400 after:transition-all hover:after:w-full"
+                >
+                  {l.label}
+                </button>
+              ) : (
+                <a
+                  href={l.href}
+                  className="relative py-2 transition-colors hover:text-yellow-400 after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0 after:bg-yellow-400 after:transition-all hover:after:w-full"
+                >
+                  {l.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -83,13 +92,25 @@ export function VietTaxiNavbar() {
           <ul className="flex flex-col gap-1">
             {links.map((l) => (
               <li key={l.href}>
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block px-3 py-2.5 rounded-lg text-gray-200 hover:bg-yellow-400/10 hover:text-yellow-400 transition-colors"
-                >
-                  {l.label}
-                </a>
+                {l.action ? (
+                  <button
+                    onClick={() => {
+                      l.action();
+                      setOpen(false);
+                    }}
+                    className="block w-full text-left px-3 py-2.5 rounded-lg text-gray-200 hover:bg-yellow-400/10 hover:text-yellow-400 transition-colors"
+                  >
+                    {l.label}
+                  </button>
+                ) : (
+                  <a
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className="block px-3 py-2.5 rounded-lg text-gray-200 hover:bg-yellow-400/10 hover:text-yellow-400 transition-colors"
+                  >
+                    {l.label}
+                  </a>
+                )}
               </li>
             ))}
             <li className="pt-2 mt-2 border-t border-white/10">

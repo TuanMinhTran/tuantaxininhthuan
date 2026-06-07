@@ -9,10 +9,12 @@ import ZaloContactButton from "@/components/ZaloContactButton";
 import BookingPopup from "@/components/VietTaxiPopupBooking";
 import VietTaxiNavbar from "@/components/VietTaxiNavbar";
 import VietTaxiServices from "@/components/VietTaxiServices";
+import PricingModal from "@/components/PricingModal";
 
 export default function HomePage() {
   const [openBooking, setOpenBooking] = useState(false);
   const [toast, setToast] = useState(null);
+  const [openPricing, setOpenPricing] = useState(false);
 
   useEffect(() => {
     if (!toast) return;
@@ -25,7 +27,7 @@ export default function HomePage() {
   }, [toast]);
   return (
     <div>
-      <VietTaxiNavbar />
+      <VietTaxiNavbar setOpenPricing={setOpenPricing} />
       <VietTaxiServices />
       <VietTaxiDetailSer />
       <WhyUsService />
@@ -37,6 +39,11 @@ export default function HomePage() {
         open={openBooking}
         onClose={() => setOpenBooking(false)}
         setToast={setToast}
+      />
+      <PricingModal
+        open={openPricing}
+        onClose={() => setOpenPricing(false)}
+        setOpenBooking={setOpenBooking}
       />
       {toast && (
         <div
