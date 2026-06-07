@@ -41,13 +41,29 @@ export default function HomePage() {
       {toast && (
         <div
           className={`
-              fixed top-5 right-5 z-[9999]
-              min-w-[320px]
-              rounded-xl px-5 py-4
-              text-white shadow-2xl
-              animate-[slideUp_.25s_ease-out]
+            fixed
 
-              ${toast.type === "success" ? "bg-green-600" : "bg-red-600"}
+            top-4 left-1/2 -translate-x-1/2
+            sm:top-5 sm:right-5 sm:left-auto sm:translate-x-0
+
+            z-[9999]
+
+            w-[calc(100%-32px)]
+            sm:w-auto
+            sm:min-w-[320px]
+
+            rounded-xl
+            px-5 py-4
+
+            text-sm sm:text-base
+            text-white
+
+            shadow-2xl
+            backdrop-blur-md
+
+            animate-[slideUp_.25s_ease-out]
+
+            ${toast.type === "success" ? "bg-green-600" : "bg-red-600"}
           `}
         >
           {toast.message}
