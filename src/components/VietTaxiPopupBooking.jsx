@@ -212,7 +212,7 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
                 />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500 md:hidden"
+                  className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -237,7 +237,7 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
                 />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500 md:hidden"
+                  className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -338,11 +338,29 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
       </div>
       {/* Keyframes (Tailwind arbitrary animate-[] reference these) */}
       <style>{`
-        @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
-        @keyframes slideUp {
-          from { opacity: 0; transform: translateY(16px) scale(.98) }
-          to   { opacity: 1; transform: translateY(0)    scale(1) }
+        @keyframes fadeIn {
+          from { opacity: 0 }
+          to { opacity: 1 }
         }
+
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(16px) scale(.98)
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1)
+          }
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-calendar-picker-indicator {
+          opacity: 0;
+          position: absolute;
+          right: 0;
+              }
       `}</style>
     </div>
   );
