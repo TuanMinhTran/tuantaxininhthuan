@@ -74,7 +74,6 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
         onSubmit?.(form);
 
         handleClose();
-
       } catch (err) {
         setSubmitting(false);
 
@@ -82,7 +81,6 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
           type: "error",
           message: "Có lỗi xảy ra. Vui lòng thử lại.",
         });
-
       }
     }, 600);
   };
@@ -95,11 +93,21 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
       aria-labelledby="vt-popup-title"
     >
       <div
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[var(--brand-3)] shadow-2xl animate-[slideUp_.25s_ease-out]"
+        className="
+          relative
+          flex flex-col
+          w-full max-w-2xl
+          h-[85vh]
+          rounded-2xl
+          bg-[var(--brand-3)]
+          shadow-2xl
+          overflow-hidden
+          animate-[slideUp_.25s_ease-out]
+        "
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-start justify-between gap-4 px-6 pt-6 pb-4 border-b border-gray-100">
+        <div className="sticky top-0 z-20 flex items-start justify-between gap-4 px-6 pt-6 pb-4 border-b border-gray-100 bg-[var(--brand-3)] backdrop-blur-xl">
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-100 text-orange-600">
               {/* Car icon */}
@@ -152,184 +160,234 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
           </button>
         </div>
         {/* Form */}
-        <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
-          {error && (
-            <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
-              {error}
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-1 flex-col overflow-hidden"
+        >
+          <div className="flex-1 overflow-y-auto">
+            <div className="px-6 py-5 space-y-4">
+              {error && (
+                <div
+                  className="
+                  rounded-xl
+                  border border-red-500/20
+                  bg-red-500/10
+                  backdrop-blur-xl
+                  px-4 py-3
+                  text-sm text-red-300
+                  shadow-lg
+                  animate-[slideDown_.25s_ease-out]
+                "
+                >
+                  {error}
+                </div>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Field label="Họ và tên *">
+                  <input
+                    type="text"
+                    value={form.name}
+                    onChange={(e) => update("name", e.target.value)}
+                    placeholder="Nguyễn Văn A"
+                    maxLength={100}
+                    className={`${inputCls} cursor-text`}
+                  />
+                </Field>
+                <Field label="Số điện thoại *">
+                  <input
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => update("phone", e.target.value)}
+                    placeholder="0393 939 393"
+                    maxLength={15}
+                    className={`${inputCls} cursor-text`}
+                  />
+                </Field>
+              </div>
+              <Field label="Điểm đón *">
+                <input
+                  type="text"
+                  value={form.pickup}
+                  onChange={(e) => update("pickup", e.target.value)}
+                  placeholder="VD: Sân bay Cam Ranh"
+                  maxLength={200}
+                  className={inputCls}
+                />
+              </Field>
+              <Field label="Điểm đến *">
+                <input
+                  type="text"
+                  value={form.dropoff}
+                  onChange={(e) => update("dropoff", e.target.value)}
+                  placeholder="VD: TP. Phan Rang"
+                  maxLength={200}
+                  className={inputCls}
+                />
+              </Field>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                <Field label="Ngày đi">
+                  <div className="relative">
+                    <input
+                      type="date"
+                      value={form.date}
+                      onChange={(e) => update("date", e.target.value)}
+                      className={`${inputCls} w-full md:pr-3 pr-10 text-gray-500`}
+                      onClick={(e) => e.target.showPicker?.()}
+                    />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M8 7V3m8 4V3m-9 8h10m-13 9h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v11a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                </Field>
+                <Field label="Giờ đón">
+                  <div className="relative">
+                    <input
+                      type="time"
+                      value={form.time}
+                      onChange={(e) => update("time", e.target.value)}
+                      className={`${inputCls} w-full md:pr-3 pr-10 text-gray-500`}
+                      onClick={(e) => e.target.showPicker?.()}
+                    />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                </Field>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Field label="Loại xe">
+                  <div className="relative">
+                    <select
+                      value={form.vehicle}
+                      onChange={(e) => update("vehicle", e.target.value)}
+                      className={`${selectCls} appearance-none`}
+                    >
+                      <option value="7-cho">Xe 7 chỗ</option>
+                      <option value="4-cho">Xe 4 chỗ</option>
+                    </select>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
+                </Field>
+                <Field label="Loại chuyến">
+                  <div className="relative">
+                    <select
+                      value={form.tripType}
+                      onChange={(e) => update("tripType", e.target.value)}
+                      className={`${selectCls} appearance-none`}
+                    >
+                      <option value="1-chieu">Một chiều</option>
+                      <option value="khu-hoi">Khứ hồi</option>
+                      <option value="theo-ngay">Thuê theo ngày</option>
+                    </select>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
+                </Field>
+              </div>
+              <Field label="Ghi chú">
+                <textarea
+                  value={form.note}
+                  onChange={(e) => update("note", e.target.value)}
+                  placeholder="Ghi chú ngày thuê/Yêu cầu thêm (nếu có)"
+                  maxLength={500}
+                  rows={3}
+                  className={`${inputCls} resize-none cursor-text`}
+                />
+              </Field>{" "}
             </div>
-          )}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Field label="Họ và tên *">
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) => update("name", e.target.value)}
-                placeholder="Nguyễn Văn A"
-                maxLength={100}
-                className={`${inputCls} cursor-text`}
-              />
-            </Field>
-            <Field label="Số điện thoại *">
-              <input
-                type="tel"
-                value={form.phone}
-                onChange={(e) => update("phone", e.target.value)}
-                placeholder="0393 939 393"
-                maxLength={15}
-                className={`${inputCls} cursor-text`}
-              />
-            </Field>
           </div>
-          <Field label="Điểm đón *">
-            <input
-              type="text"
-              value={form.pickup}
-              onChange={(e) => update("pickup", e.target.value)}
-              placeholder="VD: Sân bay Cam Ranh"
-              maxLength={200}
-              className={inputCls}
-            />
-          </Field>
-          <Field label="Điểm đến *">
-            <input
-              type="text"
-              value={form.dropoff}
-              onChange={(e) => update("dropoff", e.target.value)}
-              placeholder="VD: TP. Phan Rang"
-              maxLength={200}
-              className={inputCls}
-            />
-          </Field>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-            <Field label="Ngày đi">
-              <div className="relative">
-                <input
-                  type="date"
-                  value={form.date}
-                  onChange={(e) => update("date", e.target.value)}
-                  className={`${inputCls} w-full md:pr-3 pr-10 text-gray-500`}
-                  onClick={(e) => e.target.showPicker?.()}
-                />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8 7V3m8 4V3m-9 8h10m-13 9h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v11a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-            </Field>
-            <Field label="Giờ đón">
-              <div className="relative">
-                <input
-                  type="time"
-                  value={form.time}
-                  onChange={(e) => update("time", e.target.value)}
-                  className={`${inputCls} w-full md:pr-3 pr-10 text-gray-500`}
-                  onClick={(e) => e.target.showPicker?.()}
-                />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-            </Field>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Field label="Loại xe">
-              <div className="relative">
-                <select
-                  value={form.vehicle}
-                  onChange={(e) => update("vehicle", e.target.value)}
-                  className={`${selectCls} appearance-none`}
-                >
-                  <option value="7-cho">Xe 7 chỗ</option>
-                  <option value="4-cho">Xe 4 chỗ</option>
-                </select>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </div>
-            </Field>
-            <Field label="Loại chuyến">
-              <div className="relative">
-                <select
-                  value={form.tripType}
-                  onChange={(e) => update("tripType", e.target.value)}
-                  className={`${selectCls} appearance-none`}
-                >
-                  <option value="1-chieu">Một chiều</option>
-                  <option value="khu-hoi">Khứ hồi</option>
-                  <option value="theo-ngay">Thuê theo ngày</option>
-                </select>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </div>
-            </Field>
-          </div>
-          <Field label="Ghi chú">
-            <textarea
-              value={form.note}
-              onChange={(e) => update("note", e.target.value)}
-              placeholder="Ghi chú ngày thuê/Yêu cầu thêm (nếu có)"
-              maxLength={500}
-              rows={3}
-              className={`${inputCls} resize-none cursor-text`}
-            />
-          </Field>
           {/* Footer actions */}
-          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 pt-2">
+          <div
+            className="
+                  shrink-0
+                  border-t border-white/10
+                  bg-[var(--brand-3)]
+                  backdrop-blur-xl
+
+                  px-6 py-4
+
+                  flex flex-col-reverse sm:flex-row
+                  sm:justify-end
+                  gap-2
+                "
+          >
             <button
               type="button"
               onClick={handleClose}
-              className="px-4 py-2 rounded-lg border border-gray-300 text-white-700 hover:bg-gray-50 transition hover:text-yellow-800 transition"
+              className="
+                    px-4 py-2
+                    rounded-lg
+                    border border-gray-300
+                    text-white
+                    hover:bg-gray-50
+                    hover:text-yellow-800
+                    transition
+                  "
             >
               Hủy
             </button>
+
             <button
               type="submit"
               disabled={submitting}
-              className="px-5 py-2 rounded-lg bg-yellow-500 text-white font-semibold hover:bg-yellow-600 disabled:opacity-60 disabled:cursor-not-allowed transition"
+              className="
+                    px-5 py-2
+                    rounded-lg
+                    bg-yellow-500
+                    text-white
+                    font-semibold
+                    hover:bg-yellow-600
+                    disabled:opacity-60
+                    disabled:cursor-not-allowed
+                    transition
+                  "
             >
               {submitting ? "Đang gửi..." : "Xác nhận đặt xe"}
             </button>
@@ -361,6 +419,18 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
           position: absolute;
           right: 0;
               }
+
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
       `}</style>
     </div>
   );
@@ -372,7 +442,7 @@ const inputCls =
 const selectCls =
   "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 pr-10 text-sm text-gray-900 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition cursor-pointer";
 
-  function Field({ label, children }) {
+function Field({ label, children }) {
   return (
     <label className="block">
       <span className="mb-1 block text-sm font-medium text-white-700">

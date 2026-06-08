@@ -1,4 +1,5 @@
 import { Phone, ArrowRight, Shield, Clock, Star } from "lucide-react";
+
 function Stat({ value, label }) {
   return (
     <div className="px-4 text-center">
@@ -7,6 +8,7 @@ function Stat({ value, label }) {
     </div>
   );
 }
+
 export default function VietTaxiServices() {
   return (
     <main className="min-h-screen bg-[var(--surface)] text-white">
@@ -23,11 +25,11 @@ export default function VietTaxiServices() {
             </div>
             <h1 className="mt-8 text-5xl md:text-6xl lg:text-6xl font-bold leading-[1.05] tracking-tight">
               Di chuyển <span className="text-[var(--brand)]">Nhanh Chóng</span>
-              <span> và </span>
+              <span> - </span>
               <span className="text-[var(--brand)]">An Toàn</span>
             </h1>
             <p className="mt-8 max-w-xl text-lg text-white/60 leading-relaxed">
-              Taxi Ninh Thuận Premium mang đến trải nghiệm di chuyển tiện lợi
+              TAXI Phan Rang Khánh Hòa Premium mang đến trải nghiệm di chuyển tiện lợi
               với đội xe cao cấp, tài xế chuyên nghiệp và dịch vụ khách hàng tận
               tâm 24/7.
             </p>
@@ -67,18 +69,19 @@ export default function VietTaxiServices() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,oklch(0.82_0.17_85/0.15),transparent_60%)]" />
                 <div className="relative flex flex-col items-center text-center">
                   <div className="flex h-28 w-28 items-center justify-center rounded-full bg-[var(--brand)] text-3xl font-bold text-[var(--brand-foreground)] shadow-[0_0_60px_oklch(0.82_0.17_85/0.5)]">
-                    TT
+                    <img className="rounded-full" src="/public/image/png/logo-xe.png" alt="Xe du lịch" />
                   </div>
-                  <h3 className="mt-6 text-2xl font-bold">TAXI Ninh Thuận</h3>
+                  <h3 className="mt-6 text-2xl font-bold">TAXI - Dịch Vụ Du Lịch Tuấn Tuần</h3>
                   <p className="mt-1 text-white/60">
-                    Tiện lợi trong từng chuyến đi
+                    Dịch vụ xe Hợp Đồng, nhận đi Công tác, sự kiện, xe phục vụ cưới hỏi, tham quan trong Tỉnh, đi Bệnh viện, Tour
+                    Liên Tỉnh. <br/> Nhận đưa - đón Sân Bay
                   </p>
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-[var(--brand-2)] text-white/60">
-                <Stat value="10+" label="Năm kinh nghiệm" />
-                <Stat value="50K+" label="Khách hàng" />
-                <Stat value="200+" label="Xe cao cấp" />
+                <Stat value="5+" label="Năm kinh nghiệm" />
+                <Stat value="10K+" label="Khách hàng" />
+                <Stat value="100+" label="Xe cao cấp" />
               </div>
             </div>
           </div>

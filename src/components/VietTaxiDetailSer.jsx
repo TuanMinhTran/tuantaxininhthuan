@@ -30,7 +30,7 @@ export default function VietTaxiDetailSer() {
           <p className="text-xs md:text-lg font-semibold tracking-[0.2em] text-[var(--brand)]">
             DỊCH VỤ CỦA CHÚNG TÔI
           </p>
-          <h2 className="mt-4 text-base md:text-3xl font-bold text-foreground">
+          <h2 className="mt-4 text-base md:text-[28px] font-bold text-foreground">
             Giải Pháp Di Chuyển An toàn - Toàn Diện
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-foreground/60">

@@ -33,8 +33,8 @@ const features = [
 ];
 const stats = [
   { value: "98%", label: "Khách hài lòng" },
-  { value: "500K+", label: "Chuyến xe" },
-  { value: "15+", label: "Tỉnh thành" },
+  { value: "200K+", label: "Chuyến xe" },
+  { value: "10+", label: "Tỉnh thành" },
 ];
 export default function WhyUsService() {
   return (
@@ -46,7 +46,7 @@ export default function WhyUsService() {
             <p className="text-xs md:text-lg font-semibold tracking-[0.2em] text-[var(--brand)]">
               TẠI SAO CHỌN CHÚNG TÔI
             </p>
-            <h2 className="mt-4 text-base md:text-3xl font-bold leading-tight text-foreground">
+            <h2 className="mt-4 text-base md:text-[28px] font-bold leading-tight text-foreground">
               Kinh nghiệm - Tận tâm - Chuyên nghiệp
             </h2>
             <p className="mt-6 max-w-xl text-white/60 leading-relaxed">

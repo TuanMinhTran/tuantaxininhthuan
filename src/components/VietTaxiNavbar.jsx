@@ -7,7 +7,7 @@ export function VietTaxiNavbar({ setOpenPricing }) {
     { href: "#home", label: "Trang chủ" },
     { href: "#booking", label: "Đặt xe" },
     { label: "Bảng giá", action: () => setOpenPricing(true) },
-    { href: "#booking", label: "Liên hệ" },
+    { href: "#testimonials", label: "Đánh giá" },
   ];
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
