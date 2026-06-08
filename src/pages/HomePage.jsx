@@ -10,11 +10,13 @@ import BookingPopup from "@/components/VietTaxiPopupBooking";
 import VietTaxiNavbar from "@/components/VietTaxiNavbar";
 import VietTaxiServices from "@/components/VietTaxiServices";
 import PricingModal from "@/components/PricingModal";
+import { useLocation } from "react-router-dom";
 
 export default function HomePage() {
   const [openBooking, setOpenBooking] = useState(false);
   const [toast, setToast] = useState(null);
   const [openPricing, setOpenPricing] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     if (!toast) return;
@@ -25,6 +27,15 @@ export default function HomePage() {
 
     return () => clearTimeout(timer);
   }, [toast]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+
+    if (params.get("pricing") === "true") {
+      setOpenPricing(true);
+    }
+  }, [location.search]);
+  
   return (
     <div>
       <VietTaxiNavbar setOpenPricing={setOpenPricing} />
@@ -33,7 +44,7 @@ export default function HomePage() {
       <WhyUsService />
       <VietTaxiTestimonials />
       <VietTaxiBookings setOpenBooking={setOpenBooking} />
-      <VietTaxiFooter />
+      <VietTaxiFooter setOpenPricing={setOpenPricing} />
       <ZaloContactButton zaloId="0827524105" />
       <BookingPopup
         open={openBooking}

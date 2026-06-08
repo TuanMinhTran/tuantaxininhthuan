@@ -1,20 +1,21 @@
 import { Phone, Mail, MapPin } from "lucide-react";
 
-const quickLinks = [
-  { label: "Trang chủ", href: "#" },
-  { label: "Đặt xe", href: "#" },
-  { label: "Bảng giá", href: "#" },
-  { label: "Liên hệ", href: "#" },
-];
 const serviceLinks = [
   { label: "Đưa đón sân bay" },
   { label: "Thuê xe đường dài" },
-  { label: "Xe cưới" },
+  { label: "Xe hợp đồng" },
   { label: "Xe 4 chỗ" },
   { label: "Xe 7 chỗ" },
 ];
 
-export default function VietTaxiFooter() {
+export default function VietTaxiFooter({ setOpenPricing }) {
+  const quickLinks = [
+    { label: "Trang chủ", href: "/#home" },
+    { label: "Đặt xe", href: "/#booking" },
+    { label: "Bảng giá", href: "/?pricing=true" },
+    { label: "Đánh giá", href: "/#testimonials" },
+  ];
+
   return (
     <footer className="bg-[var(--surface-2)] text-white border-t border-white/10">
       <div className="mx-auto max-w-7xl px-10 py-16">
@@ -29,7 +30,7 @@ export default function VietTaxiFooter() {
                 />
               </div>
               <span className="text-xl font-bold">
-                TAXI <span className="text-[var(--brand)]">Ninh Thuận</span>
+                TAXI <span className="text-[var(--brand)]">Phan Rang - KH</span>
               </span>
             </div>
             <p className="mt-5 text-sm leading-relaxed text-white/60">
@@ -39,12 +40,24 @@ export default function VietTaxiFooter() {
           </div>
           <div>
             <h4 className="font-semibold">Liên kết nhanh</h4>
-            <ul className="mt-5 space-y-3 text-sm text-white/60">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="hover:text-[var(--brand)]">
-                    {link.label}
-                  </a>
+            <ul className="mt-5 space-y-3 text-sm text-white/60 cursor-pointer">
+              {quickLinks.map((l, i) => (
+                <li key={i}>
+                  {l.action ? (
+                    <button
+                      onClick={l.action}
+                      className="relative py-2 transition-colors hover:text-yellow-400"
+                    >
+                      {l.label}
+                    </button>
+                  ) : (
+                    <a
+                      href={l.href}
+                      className="relative py-2 transition-colors hover:text-yellow-400"
+                    >
+                      {l.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -87,12 +100,12 @@ export default function VietTaxiFooter() {
           </div>
         </div>
         <div className="mt-12 border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs md:text-sm text-white/50">
-          <p>© 2026 TAXI Phan Rang - KH. Tất cả quyền được bảo lưu.</p>
+          <p>© 2026 TAXI Phan Rang - KH. Copyright by TUẤN TRẦN.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-[var(--brand)]">
+            <a href="/dieu-khoan-su-dung" className="hover:text-[var(--brand)]">
               Điều khoản sử dụng
             </a>
-            <a href="#" className="hover:text-[var(--brand)]">
+            <a href="/chinh-sach-bao-mat" className="hover:text-[var(--brand)]">
               Chính sách bảo mật
             </a>
           </div>

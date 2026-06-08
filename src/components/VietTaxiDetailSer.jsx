@@ -8,7 +8,7 @@ const detailServices = [
   },
   {
     icon: MapPin,
-    title: "Thuê Xe Đường Dài",
+    title: "Thuê Xe Hợp Đồng",
     desc: "Thuê xe đi tỉnh, du lịch với tài xế kinh nghiệm. Xe đời mới, máy lạnh, wifi miễn phí trên mọi chuyến đi.",
   },
   {

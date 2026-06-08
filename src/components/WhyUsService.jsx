@@ -22,7 +22,7 @@ const features = [
   },
   {
     icon: Car,
-    title: "Xe Đời Mới Cao Cấp",
+    title: "Xe Đời Mới Rộng Rãi",
     desc: "Đội xe được cập nhật thường xuyên với các dòng xe đời mới, tiện nghi và sang trọng.",
   },
   {
@@ -50,7 +50,7 @@ export default function WhyUsService() {
               Kinh nghiệm - Tận tâm - Chuyên nghiệp
             </h2>
             <p className="mt-6 max-w-xl text-white/60 leading-relaxed">
-              VietTaxi Premium tự hào là đơn vị tiên phong trong lĩnh vực taxi
+              TAXI Phan Rang Khánh Hòa Premium tự hào là đơn vị tiên phong trong lĩnh vực taxi
               cao cấp tại Việt Nam. Với đội xe hiện đại và tài xế chuyên nghiệp,
               chúng tôi cam kết mang đến trải nghiệm di chuyển tuyệt vời nhất
               cho mọi khách hàng.
@@ -76,7 +76,7 @@ export default function WhyUsService() {
               return (
                 <div
                   key={f.title}
-                  className="rounded-2xl border border-[var(--brand-2)]/30 bg-[var(--surface)] p-6 transition hover:border-[var(--brand)]/40 hover:text-[var(--brand)]"
+                  className="rounded-2xl border border-[var(--brand-2)]/30 bg-[var(--surface)] p-5 transition hover:border-[var(--brand)]/40 hover:text-[var(--brand)]"
                 >
                   <div className="flex flex-grow items-center gap-3">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--brand)]/15">

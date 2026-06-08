@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 
 export function VietTaxiNavbar({ setOpenPricing }) {
   const links = [
-    { href: "#home", label: "Trang chủ" },
-    { href: "#booking", label: "Đặt xe" },
-    { label: "Bảng giá", action: () => setOpenPricing(true) },
-    { href: "#testimonials", label: "Đánh giá" },
+    { href: "/#home", label: "Trang chủ" },
+    { href: "/#booking", label: "Đặt xe" },
+    { href: "/?pricing=true", label: "Bảng giá" },
+    { href: "/#testimonials", label: "Đánh giá" },
   ];
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ export function VietTaxiNavbar({ setOpenPricing }) {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-10 py-3">
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-3 group">
+        <a href="/#home" className="flex items-center gap-3 group">
           <span className="grid h-10 w-10 place-items-center rounded-md text-black font-extrabold text-sm border border-[var(--brand)] shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-transform group-hover:scale-105">
             <img
               className="rounded-md"
@@ -41,12 +41,12 @@ export function VietTaxiNavbar({ setOpenPricing }) {
         </a>
         {/* Desktop nav links */}
         <ul className="hidden md:flex items-center gap-10 text-base font-medium text-gray-300">
-          {links.map((l) => (
-            <li key={l.href}>
+          {links.map((l, i) => (
+            <li key={i}>
               {l.action ? (
                 <button
                   onClick={l.action}
-                  className="relative py-2 cursor-pointer transition-colors hover:text-yellow-400 after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0 after:bg-yellow-400 after:transition-all hover:after:w-full"
+                  className="relative py-2 transition-colors hover:text-yellow-400"
                 >
                   {l.label}
                 </button>
@@ -74,7 +74,7 @@ export function VietTaxiNavbar({ setOpenPricing }) {
             asChild
             className="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold rounded-lg px-5 shadow-[0_0_20px_rgba(250,204,21,0.35)] hover:shadow-[0_0_28px_rgba(250,204,21,0.55)] transition-all"
           >
-            <a href="#booking">Đặt xe ngay</a>
+            <a href="/#booking">Đặt xe ngay</a>
           </Button>
         </div>
         {/* Mobile toggle */}

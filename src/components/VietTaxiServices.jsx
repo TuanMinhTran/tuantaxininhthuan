@@ -29,9 +29,9 @@ export default function VietTaxiServices() {
               <span className="text-[var(--brand)]">An Toàn</span>
             </h1>
             <p className="mt-8 max-w-xl text-lg text-white/60 leading-relaxed">
-              TAXI Phan Rang Khánh Hòa Premium mang đến trải nghiệm di chuyển tiện lợi
-              với đội xe cao cấp, tài xế chuyên nghiệp và dịch vụ khách hàng tận
-              tâm 24/7.
+              TAXI Phan Rang Khánh Hòa Premium mang đến trải nghiệm di chuyển
+              tiện lợi với đội xe cao cấp, tài xế chuyên nghiệp và dịch vụ khách
+              hàng tận tâm 24/7.
             </p>
             <div className="mt-10 flex flex-wrap gap-4 justify-center md:justify-start">
               <a href="#booking">
@@ -68,13 +68,20 @@ export default function VietTaxiServices() {
               <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[var(--surface-2)] via-[var(--surface)] to-black">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,oklch(0.82_0.17_85/0.15),transparent_60%)]" />
                 <div className="relative flex flex-col items-center text-center">
-                  <div className="flex h-28 w-28 items-center justify-center rounded-full bg-[var(--brand)] text-3xl font-bold text-[var(--brand-foreground)] shadow-[0_0_60px_oklch(0.82_0.17_85/0.5)]">
-                    <img className="rounded-full" src="/public/image/png/logo-xe.png" alt="Xe du lịch" />
+                  <div className="flex h-20 w-20 md:h-28 md:w-28 items-center justify-center rounded-full bg-[var(--brand)] text-3xl font-bold text-[var(--brand-foreground)] shadow-[0_0_60px_oklch(0.82_0.17_85/0.5)]">
+                    <img
+                      className="rounded-full"
+                      src="/image/png/logo-xe.png"
+                      alt="Xe du lịch"
+                    />
                   </div>
-                  <h3 className="mt-6 text-2xl font-bold">TAXI - Dịch Vụ Du Lịch Tuấn Tuần</h3>
-                  <p className="mt-1 text-white/60">
-                    Dịch vụ xe Hợp Đồng, nhận đi Công tác, sự kiện, xe phục vụ cưới hỏi, tham quan trong Tỉnh, đi Bệnh viện, Tour
-                    Liên Tỉnh. <br/> Nhận đưa - đón Sân Bay
+                  <h3 className="mt-6 text-sm md:text-2xl font-bold text-[var(--brand)]">
+                    TAXI - Dịch Vụ Du Lịch TUẤN TRẦN
+                  </h3>
+                  <p className="mt-1 text-white/60 text-[12px] md:text-base">
+                    Dịch vụ xe Hợp Đồng, nhận đi Công tác, sự kiện, xe phục vụ
+                    cưới hỏi, tham quan trong Tỉnh, đi Bệnh viện, Tour Liên
+                    Tỉnh. <br /> Nhận đưa - đón Sân Bay
                   </p>
                 </div>
               </div>

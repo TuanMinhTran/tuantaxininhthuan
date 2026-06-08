@@ -34,7 +34,7 @@ export default function VietTaxiBookings({ setOpenBooking }) {
                   <Phone className="h-7 w-7 text-[var(--brand-foreground)]" />
                 </div>
                 <p className="mt-4 text-sm text-[var(--brand-foreground)]/70">
-                  Hotline 24/7
+                  <b className="text-sm md:text-xl">HOTLINE</b> 24/7
                 </p>
                 <p className="mt-1 text-2xl md:text-3xl font-bold text-[var(--brand-foreground)]">
                   0827 524 105

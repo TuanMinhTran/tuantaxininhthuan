@@ -19,7 +19,7 @@ const testimonials = [
     initial: "N",
   },
   {
-    text: "Dịch vụ xe cưới của VietTaxi rất chuyên nghiệp. Xe được trang trí đẹp, tài xế lịch sự. Ngày cưới của tôi thật hoàn hảo!",
+    text: "Dịch vụ xe cưới của DVDL TUẤN TRẦN rất chuyên nghiệp. Xe được trang trí đẹp, tài xế lịch sự. Ngày cưới của tôi thật hoàn hảo!",
     name: "Phạm Thu Hằng",
     role: "Cô dâu",
     initial: "H",
@@ -68,7 +68,7 @@ export default function VietTaxiTestimonials() {
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto">
             Hơn 5000 đánh giá 5 sao từ khách hàng là minh chứng cho chất lượng
-            dịch vụ của VietTaxi Premium.
+            dịch vụ của Taxi Phan Rang Khánh Hòa Premium.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
