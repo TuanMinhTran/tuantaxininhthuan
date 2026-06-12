@@ -1,11 +1,13 @@
 import StatusBadge from "./StatusBadge";
 import BookingActions from "./BookingActions";
+
 const fmt = (iso) => new Date(iso).toLocaleString("vi-VN");
-export default function BookingTable({ bookings }) {
+
+export default function BookingTable({ bookings, highlightId, onSelectBooking }) {
   return (
     <div className="overflow-x-auto rounded-2xl border border-white/5 bg-[var(--surface)]">
       <table className="w-full text-sm">
-        <thead className="border-b border-white/5 text-left text-xs uppercase text-foreground/50">
+        <thead className="border-b border-white/5 text-left text-xs text-yellow-400 uppercase text-foreground/50 ">
           <tr>
             <th className="px-4 py-3">Khách hàng</th>
             <th className="px-4 py-3">Hành trình</th>
@@ -20,10 +22,30 @@ export default function BookingTable({ bookings }) {
         <tbody>
           {bookings.map((b) => (
             <tr
+              id={`booking-${b.id}`}
               key={b.id}
-              className="border-b border-white/5 transition hover:bg-white/[0.02]"
+              onClick={(e) => {
+                if (
+                  e.target.closest("button") ||
+                  e.target.closest("[role='combobox']") ||
+                  e.target.closest("select")
+                ) {
+                  return;
+                }
+
+                onSelectBooking(b);
+              }}
+              className={`
+                border-b border-white/5
+                transition-all duration-700
+                ${
+                  highlightId === b.id
+                    ? "flash-booking bg-yellow-400/10"
+                    : "hover:bg-white/[0.02]"
+                }
+              `}
             >
-              <td className="px-4 py-4">
+              <td className="px-4 py-4 w-[110px]">
                 <div className="flex items-center gap-2 font-medium">
                   {b.name}
                   {!b.seen && (
@@ -34,7 +56,7 @@ export default function BookingTable({ bookings }) {
                 </div>
                 <div className="text-xs text-foreground/60">{b.phone}</div>
               </td>
-              <td className="px-4 py-4 max-w-xs">
+              <td className="px-4 py-4 max-w-xs w-[110px]">
                 <div className="text-foreground/90">{b.pickup}</div>
                 <div className="text-xs text-foreground/50">
                   → {b.dropoff || "—"}
@@ -60,7 +82,7 @@ export default function BookingTable({ bookings }) {
                 <StatusBadge status={b.status} />
               </td>
               <td className="px-4 py-4 text-right">
-                <BookingActions booking={b} />
+                <BookingActions booking={b} onEdit={onSelectBooking} />
               </td>
             </tr>
           ))}
@@ -69,3 +91,17 @@ export default function BookingTable({ bookings }) {
     </div>
   );
 }
+<style>{`
+  @keyframes flashRow {
+    0% {
+      background: rgba(250, 204, 21, 0.35);
+    }
+    100% {
+      background: rgba(250, 204, 21, 0.08);
+    }
+  }
+
+  .flash-booking {
+    animation: flashRow 1.2s ease;
+  }
+`}</style>;

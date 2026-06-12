@@ -79,7 +79,7 @@ export default function VietTaxiServices() {
                     TAXI - Dịch Vụ Du Lịch TUẤN TRẦN
                   </h3>
                   <p className="mt-1 text-white/60 text-[12px] md:text-base">
-                    Dịch vụ xe Hợp Đồng, nhận đi Công tác, sự kiện, xe phục vụ
+                    Dịch vụ xe Hợp Đồng, nhận đi Công tác, sự kiện, phục vụ xe hoa -
                     cưới hỏi, tham quan trong Tỉnh, đi Bệnh viện, Tour Liên
                     Tỉnh. <br /> Nhận đưa - đón Sân Bay
                   </p>

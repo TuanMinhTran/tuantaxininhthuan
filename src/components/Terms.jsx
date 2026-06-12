@@ -47,11 +47,14 @@ export default function Terms() {
 
             <section>
               <h2 className="md:text-2xl text-lg font-semibold text-white mb-3">
-                4. Hủy chuyến
+                4. Hủy chuyến hoặc Đổi lịch
               </h2>
               <p className="text-sm md:text-lg">
-                Khách hàng vui lòng thông báo sớm nếu muốn hủy chuyến để tránh
-                ảnh hưởng lịch trình tài xế.
+                Khách hàng vui lòng thông báo sớm nếu muốn hủy chuyến/đổi lịch để tránh
+                ảnh hưởng lịch trình tài xế. Nếu khách hàng không thông báo trước chúng 
+                tôi có toàn quyền quyết định về chuyến xe đó. Và khách hàng sẽ bồi thường 
+                một khoản tương ứng 5% so với phí đặt trước chuyến xe nhưng không thực hiện 
+                đúng với trách nhiệm của chuyến xe đó.  
               </p>
             </section>
 

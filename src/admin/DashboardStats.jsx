@@ -1,4 +1,5 @@
 import { CalendarCheck, Clock, CheckCircle2, XCircle } from "lucide-react";
+
 function Card({ icon: Icon, label, value, accent }) {
   return (
     <div className="rounded-2xl border border-white/5 bg-[var(--surface)] p-5 transition hover:border-[var(--brand)]/40">
@@ -15,6 +16,7 @@ function Card({ icon: Icon, label, value, accent }) {
     </div>
   );
 }
+
 export default function DashboardStats({ bookings }) {
   const by = (s) => bookings.filter((b) => b.status === s).length;
   const gold = "#d4a82c";

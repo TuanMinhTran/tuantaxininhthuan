@@ -4,6 +4,8 @@ import { addBooking } from "../lib/bookings";
 export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [agreed, setAgreed] = useState(false);
+
   const initialForm = {
     name: "",
     phone: "",
@@ -20,6 +22,7 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
 
   const handleClose = () => {
     setError("");
+    setAgreed(false);
     setForm(initialForm);
     onClose?.();
   };
@@ -55,6 +58,11 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
 
     if (!/^[0-9+\-\s]{8,15}$/.test(form.phone.trim())) {
       setError("Số điện thoại không hợp lệ");
+      return;
+    }
+
+    if (!agreed) {
+      setError("Vui lòng đồng ý với Chính sách & Điều khoản");
       return;
     }
 
@@ -344,6 +352,70 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
             </div>
           </div>
           {/* Footer actions */}
+          <div className="rounded-xl px-4 py-3">
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="hidden"
+              />
+
+              {/* Custom checkbox */}
+              <div
+                onClick={() => setAgreed(!agreed)}
+                className={`
+                  mt-0.5
+                  flex h-5 w-5 shrink-0 items-center justify-center
+                  rounded-md border
+                  transition-all duration-200
+
+                  ${
+                    agreed
+                      ? "border-yellow-500 bg-yellow-500 shadow-lg shadow-yellow-500/30"
+                      : "border-white/30 bg-white/5 hover:border-yellow-400"
+                  }
+                `}
+              >
+                {agreed && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-3.5 w-3.5 text-black"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                )}
+              </div>
+
+              <span className="text-sm text-white/90 leading-relaxed">
+                Tôi đồng ý với{" "}
+                <a
+                  href="/chinh-sach-bao-mat"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-yellow-400 hover:text-yellow-300 underline"
+                >
+                  Chính sách
+                </a>{" "}
+                và{" "}
+                <a
+                  href="/dieu-khoan-su-dung"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-yellow-400 hover:text-yellow-300 underline"
+                >
+                  Điều khoản dịch vụ
+                </a>
+              </span>
+            </label>
+          </div>
+
           <div
             className="
                   shrink-0
@@ -376,7 +448,7 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
 
             <button
               type="submit"
-              disabled={submitting}
+              disabled={submitting || !agreed}
               className="
                     px-5 py-2
                     rounded-lg
@@ -386,6 +458,7 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
                     hover:bg-yellow-600
                     disabled:opacity-60
                     disabled:cursor-not-allowed
+                    disabled:hover:bg-yellow-500
                     transition
                   "
             >

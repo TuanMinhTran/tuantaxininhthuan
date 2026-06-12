@@ -4,28 +4,28 @@ import { useEffect } from "react";
 const prices = [
   {
     title: "Phan Rang → Sân bay Cam Ranh ",
-    four: "700.000đ",
+    four: "550.000đ",
     seven: "850.000đ",
   },
   {
     title: "Phan Rang → Vĩnh Hy",
-    four: "400.000đ",
-    seven: "500.000đ",
+    four: "450.000đ",
+    seven: "650.000đ",
   },
   {
     title: "Phan Rang → Đà Lạt",
-    four: "1.800.000đ",
-    seven: "2.200.000đ",
-  },
-  {
-    title: "Phan Rang → Nha Trang",
     four: "1.000.000đ",
     seven: "1.300.000đ",
   },
   {
+    title: "Phan Rang → Nha Trang",
+    four: "1.100.000đ",
+    seven: "1.400.000đ",
+  },
+  {
     title: "Phan Rang → TP Hồ Chí Minh",
-    four: "2.200.000đ",
-    seven: "2.600.000đ",
+    four: "2.350.000đ",
+    seven: "2.800.000đ",
   },
 ];
 
@@ -140,6 +140,11 @@ export default function PricingModal({ open, onClose, setOpenBooking }) {
 
             <p className="mt-2 text-gray-400">
               Giá tham khảo — liên hệ để báo giá chính xác theo thời điểm.
+              <br />
+              Giá bên dưới{" "}
+              <span className="font-semibold text-yellow-400">
+                KHÔNG BAO GỒM KHỨ HỒI.
+              </span>
             </p>
           </div>
 

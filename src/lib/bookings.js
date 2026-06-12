@@ -32,6 +32,18 @@ export function updateBooking(id, patch) {
 export function deleteBooking(id) {
   saveBookings(getBookings().filter((b) => b.id !== id));
 }
+export function updateCancelBooking(id) {
+  const updated = getBookings().map((b) =>
+    b.id === id
+      ? {
+          ...b,
+          status: "cancelled",
+        }
+      : b
+  );
+
+  saveBookings(updated);
+}
 export function markAllSeen() {
   saveBookings(getBookings().map((b) => ({ ...b, seen: true })));
 }

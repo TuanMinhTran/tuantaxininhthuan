@@ -22,7 +22,8 @@ export default function PrivacyPolicy() {
               <p className="text-sm md:text-lg">
                 Chúng tôi có thể thu thập các thông tin như họ tên, số điện
                 thoại, địa điểm đón/trả khách nhằm phục vụ việc đặt xe và chăm
-                sóc khách hàng.
+                sóc khách hàng. Mọi thông tin sẽ được chúng tôi toàn quyền quyết
+                định để được hỗ trợ khách hàng một cách tốt nhất.
               </p>
             </section>
 
@@ -42,7 +43,9 @@ export default function PrivacyPolicy() {
               </h2>
               <p className="text-sm md:text-lg">
                 Chúng tôi cam kết không chia sẻ hoặc bán thông tin khách hàng
-                cho bên thứ ba khi chưa có sự đồng ý từ khách hàng.
+                cho bên thứ ba khi chưa có sự đồng ý từ khách hàng. Trừ trường hợp 
+                dùng thông tin của quý khách hàng để gọi xe hỗ trợ cho quý khách nhanh 
+                nhất.
               </p>
             </section>
 
@@ -52,7 +55,9 @@ export default function PrivacyPolicy() {
               </h2>
               <p className="text-sm md:text-lg">
                 Khách hàng có quyền yêu cầu chỉnh sửa hoặc xóa thông tin cá nhân
-                bất kỳ lúc nào bằng cách liên hệ với chúng tôi.
+                bất kỳ lúc nào bằng cách liên hệ với chúng tôi. Khiếu nại tài xế 
+                qua Zalo để chúng tôi có hướng xử lý tốt nhất nếu tài xế có những 
+                lời lẽ, hành động không đúng chuẩn mực với khách hàng.
               </p>
             </section>
 
