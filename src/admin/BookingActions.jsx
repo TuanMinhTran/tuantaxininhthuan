@@ -8,7 +8,7 @@ import {
 
 export default function BookingActions({ booking, onEdit }) {
   return (
-    <div className="flex items-center justify-end gap-2 whitespace-nowrap">
+    <div className="flex flex-wrap gap-2 items-center">
       {booking.status === "pending" && (
         <button
           onClick={() =>

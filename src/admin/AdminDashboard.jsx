@@ -242,7 +242,32 @@ export default function AdminDashboard() {
                 </button>
 
                 {notifyOpen && (
-                  <div className="absolute right-0 mt-3 w-80 rounded-2xl border border-white/10 bg-[#111] shadow-2xl overflow-hidden z-50">
+                  <div
+                    className="absolute
+                      -left-1
+                      -translate-x-1/2
+                      mt-3
+                      w-[92vw]
+                      max-w-[300px]
+
+                      lg:left-auto
+                      lg:right-0
+                      lg:translate-x-0
+                      lg:w-80
+
+                      animate-in
+                      fade-in
+                      zoom-in-95
+                      duration-200
+
+                      rounded-2xl
+                      border border-white/10
+                      bg-[#111]
+                      shadow-2xl
+                      overflow-hidden
+                      z-50
+                    "
+                  >
                     <div className="border-b border-white/5 px-4 py-3 font-semibold text-yellow-400">
                       Thông Báo Bookings
                     </div>
@@ -401,7 +426,12 @@ export default function AdminDashboard() {
                 </div>
                 <div className="space-y-3 lg:hidden">
                   {filtered.map((b) => (
-                    <BookingCardMobile key={b.id} booking={b} />
+                    <BookingCardMobile
+                      key={b.id}
+                      booking={b}
+                      onSelectBooking={setSelectedBooking}
+                      highlightId={highlightId}
+                    />
                   ))}
                 </div>
               </>
