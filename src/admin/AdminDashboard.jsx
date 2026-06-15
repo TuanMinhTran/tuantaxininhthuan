@@ -161,12 +161,6 @@ export default function AdminDashboard() {
 
   const newCount = bookings.filter((b) => !b.seen).length;
 
-  const scrollToBooking = (booking) => {
-    if (!booking?.id) return;
-    setQuery("");
-    setStatus("all");
-    setHighlightId(booking.id);
-  };
   useEffect(() => {
     if (!highlightId) return;
     const timeout = window.setTimeout(() => {
@@ -189,40 +183,13 @@ export default function AdminDashboard() {
 
     setBookings(updated);
 
+    setQuery("");
+    setStatus("all");
+
     setNotifyOpen(false);
     setAllNotifyOpen(false);
 
     setHighlightId(bookingId);
-
-    setTimeout(() => {
-      const el =
-        document.getElementById(`desktop-booking-${bookingId}`) ||
-        document.getElementById(`mobile-booking-${bookingId}`);
-
-      if (!el) return;
-
-      const isMobile = window.innerWidth < 1024;
-
-      if (isMobile) {
-        const y = el.getBoundingClientRect().top + window.pageYOffset - 120;
-
-        window.scrollTo({
-          top: y,
-          behavior: "smooth",
-        });
-      } else {
-        const y = el.getBoundingClientRect().top + window.pageYOffset - 240;
-
-        window.scrollTo({
-          top: y,
-          behavior: "smooth",
-        });
-      }
-
-      setTimeout(() => {
-        setHighlightId(null);
-      }, 2500);
-    }, 350);
   };
 
   const filtered = useMemo(() => {
@@ -478,7 +445,7 @@ export default function AdminDashboard() {
                   <BookingTable
                     bookings={filtered}
                     highlightId={highlightId}
-                    onSelectBooking={scrollToBooking}
+                    onSelectBooking={setSelectedBooking}
                   />
                 </div>
                 <div className="space-y-3 lg:hidden" ref={listRef}>
@@ -487,7 +454,7 @@ export default function AdminDashboard() {
                       key={b.id}
                       booking={b}
                       highlightId={highlightId}
-                      onSelectBooking={scrollToBooking}
+                      onSelectBooking={setSelectedBooking}
                     />
                   ))}
                 </div>

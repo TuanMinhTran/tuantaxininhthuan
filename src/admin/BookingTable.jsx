@@ -89,7 +89,7 @@ export default function BookingTable({
                 className="px-4 py-4 text-right"
                 onClick={(e) => e.stopPropagation()}
               >
-                <BookingActions booking={b} />
+                <BookingActions booking={b} onSelectBooking={onSelectBooking} />
               </td>
             </tr>
           ))}
