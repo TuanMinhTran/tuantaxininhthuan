@@ -7,14 +7,8 @@ const fmt = (iso) => new Date(iso).toLocaleString("vi-VN");
 export default function BookingCardMobile({ booking: b, onSelectBooking, highlightId }) {
   return (
     <div
-      id={`booking-${b.id}`}
-      onClick={(e) => {
-        if (e.target.closest("button") || e.target.closest("a")) {
-          return;
-        }
-
-        onSelectBooking?.(b);
-      }}
+      id={`mobile-booking-${b.id}`}
+      onClick={() => onSelectBooking?.(b)}
       className={`
         rounded-2xl
         border border-white/5
@@ -76,7 +70,7 @@ export default function BookingCardMobile({ booking: b, onSelectBooking, highlig
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <BookingActions booking={b} />
+          <BookingActions booking={b} onSelectBooking={onSelectBooking} />
         </div>
       </div>
     </div>

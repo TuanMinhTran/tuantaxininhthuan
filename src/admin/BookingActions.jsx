@@ -6,16 +6,17 @@ import {
   updateCancelBooking,
 } from "@/lib/bookings";
 
-export default function BookingActions({ booking, onEdit }) {
+export default function BookingActions({ booking, onEdit, onSelectBooking }) {
   return (
     <div className="flex flex-wrap gap-2 items-center">
       {booking.status === "pending" && (
         <button
-          onClick={() =>
+          onClick={(e) => {
+            e.stopPropagation();
             updateBooking(booking.id, {
               status: "confirmed",
-            })
-          }
+            });
+          }}
           className="inline-flex items-center gap-1 rounded-lg border border-blue-500/30 bg-blue-500/10 px-3 py-1.5 text-xs font-medium text-blue-400 hover:bg-blue-500/20"
         >
           <Check className="h-3.5 w-3.5" />
@@ -25,11 +26,12 @@ export default function BookingActions({ booking, onEdit }) {
 
       {booking.status !== "completed" && booking.status !== "cancelled" && (
         <button
-          onClick={() =>
+          onClick={(e) => {
+            e.stopPropagation();
             updateBooking(booking.id, {
               status: "completed",
-            })
-          }
+            });
+          }}
           className="inline-flex items-center gap-1 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-400 hover:bg-emerald-500/20"
         >
           <CheckCheck className="h-3.5 w-3.5" />
@@ -38,7 +40,11 @@ export default function BookingActions({ booking, onEdit }) {
       )}
       {booking.status !== "cancelled" && (
         <button
-          onClick={() => onEdit(booking)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelectBooking?.(booking);
+            onEdit(booking);
+          }}
           className="inline-flex items-center gap-1 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-3 py-1.5 text-xs font-medium text-yellow-400 hover:bg-yellow-500/20"
         >
           <Pencil className="h-3.5 w-3.5" />
@@ -48,7 +54,8 @@ export default function BookingActions({ booking, onEdit }) {
       {/* NÚT HỦY */}
       {booking.status !== "cancelled" ? (
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             if (confirm("Hủy booking này?")) {
               updateCancelBooking(booking.id);
             }
@@ -60,7 +67,8 @@ export default function BookingActions({ booking, onEdit }) {
         </button>
       ) : (
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             if (confirm("Xóa vĩnh viễn booking này?")) {
               deleteBooking(booking.id);
             }

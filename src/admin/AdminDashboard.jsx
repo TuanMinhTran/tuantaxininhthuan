@@ -86,6 +86,7 @@ export default function AdminDashboard() {
   const LAST_HEARD_KEY = "viettaxi_last_heard_booking";
   const [audioUnlocked, setAudioUnlocked] = useState(false);
   const isCancelled = selectedBooking?.status === "cancelled";
+  const listRef = useRef(null);
 
   useEffect(() => {
     const unlockAudio = async () => {
@@ -157,7 +158,9 @@ export default function AdminDashboard() {
       window.removeEventListener("storage", sync);
     };
   }, []);
+
   const newCount = bookings.filter((b) => !b.seen).length;
+
   const handleNotificationClick = (bookingId) => {
     const updated = bookings.map((b) =>
       b.id === bookingId ? { ...b, seen: true } : b
@@ -168,25 +171,30 @@ export default function AdminDashboard() {
     setBookings(updated);
 
     setNotifyOpen(false);
-
     setAllNotifyOpen(false);
 
-    setTimeout(() => {
-      const el = document.getElementById(`booking-${bookingId}`);
+    setHighlightId(bookingId);
 
-      if (el) {
-        el.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const el =
+          document.getElementById(`desktop-booking-${bookingId}`) ||
+          document.getElementById(`mobile-booking-${bookingId}`);
 
-        setHighlightId(bookingId);
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.scrollY - 240;
 
-        setTimeout(() => {
-          setHighlightId(null);
-        }, 2500);
-      }
-    }, 100);
+          window.scrollTo({
+            top: y,
+            behavior: "smooth",
+          });
+
+          setTimeout(() => {
+            setHighlightId(null);
+          }, 2500);
+        }
+      });
+    });
   };
 
   const filtered = useMemo(() => {
@@ -217,7 +225,7 @@ export default function AdminDashboard() {
           </div>
         )}
         <main className="flex-1 min-w-0">
-          <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-white/5 bg-background/80 px-4 py-4 backdrop-blur lg:px-8">
+          <header className="sticky top-0 z-60 flex items-center gap-3 border-b border-white/5 bg-background/80 px-4 py-4 backdrop-blur lg:px-8">
             <button
               onClick={() => setMenuOpen(true)}
               className="rounded-lg p-2 hover:bg-white/5 lg:hidden"
@@ -329,19 +337,38 @@ export default function AdminDashboard() {
           </header>
           <div className="space-y-6 p-4 lg:p-8">
             <DashboardStats bookings={bookings} />
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-foreground/40" />
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Tìm theo tên hoặc số điện thoại"
-                  className="w-full rounded-xl border border-white/10 bg-[var(--surface)] py-3 pl-10 pr-4 text-sm outline-none focus:border-[var(--brand)]"
-                />
-              </div>
-              <Select value={status} onValueChange={setStatus}>
-                <SelectTrigger
-                  className="
+            <div
+              className="
+                sticky
+                top-[74px]
+                z-20
+
+                mt-6
+                mb-6
+
+                rounded-2xl
+                border border-white/10
+                bg-[#0b0b0b]/50
+                backdrop-blur-xl
+
+                p-3
+
+                shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+              "
+            >
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-foreground/40" />
+                  <input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Tìm theo tên hoặc số điện thoại"
+                    className="w-full rounded-xl border border-white/10 bg-[var(--surface)] py-3 pl-10 pr-4 text-sm outline-none focus:border-[var(--brand)]"
+                  />
+                </div>
+                <Select value={status} onValueChange={setStatus}>
+                  <SelectTrigger
+                    className="
                       w-[220px]
                       h-12
                       p-[22px]
@@ -363,15 +390,15 @@ export default function AdminDashboard() {
                       focus:ring-0
                       focus:ring-offset-0
                   "
-                >
-                  <SelectValue placeholder="Tất cả trạng thái" />
-                </SelectTrigger>
+                  >
+                    <SelectValue placeholder="Tất cả trạng thái" />
+                  </SelectTrigger>
 
-                <SelectContent
-                  position="popper"
-                  align="start"
-                  sideOffset={6}
-                  className="
+                  <SelectContent
+                    position="popper"
+                    align="start"
+                    sideOffset={6}
+                    className="
                     w-[220px]
 
                     rounded-xl
@@ -381,14 +408,14 @@ export default function AdminDashboard() {
 
                     overflow-hidden
                   "
-                >
-                  <SelectItem value="all">Tất cả trạng thái</SelectItem>
+                  >
+                    <SelectItem value="all">Tất cả trạng thái</SelectItem>
 
-                  {Object.entries(STATUS_LABELS).map(([k, v]) => (
-                    <SelectItem
-                      key={k}
-                      value={k}
-                      className="
+                    {Object.entries(STATUS_LABELS).map(([k, v]) => (
+                      <SelectItem
+                        key={k}
+                        value={k}
+                        className="
                         cursor-pointer
                         transition-colors
 
@@ -398,12 +425,13 @@ export default function AdminDashboard() {
                         focus:bg-[var(--brand)]
                         focus:text-black
                       "
-                    >
-                      {v}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                      >
+                        {v}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
             {filtered.length === 0 ? (
               <div className="rounded-2xl border border-dashed border-white/10 bg-[var(--surface)] p-16 text-center animate-fade-in">
@@ -424,7 +452,7 @@ export default function AdminDashboard() {
                     onSelectBooking={setSelectedBooking}
                   />
                 </div>
-                <div className="space-y-3 lg:hidden">
+                <div className="space-y-3 lg:hidden" ref={listRef}>
                   {filtered.map((b) => (
                     <BookingCardMobile
                       key={b.id}

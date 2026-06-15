@@ -5,10 +5,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
-html {
-  scroll-behavior: smooth;
+html,
+body,
+#root {
+  height: 100%;
 }
 
+body {
+  overflow-y: auto;
+}
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);

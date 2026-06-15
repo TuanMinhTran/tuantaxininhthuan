@@ -22,7 +22,7 @@ export default function BookingTable({ bookings, highlightId, onSelectBooking })
         <tbody>
           {bookings.map((b) => (
             <tr
-              id={`booking-${b.id}`}
+              id={`desktop-booking-${b.id}`}
               key={b.id}
               onClick={(e) => {
                 if (
