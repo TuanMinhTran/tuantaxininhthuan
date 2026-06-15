@@ -182,12 +182,21 @@ export default function AdminDashboard() {
           document.getElementById(`mobile-booking-${bookingId}`);
 
         if (el) {
-          const y = el.getBoundingClientRect().top + window.scrollY - 240;
+          const isMobile = window.innerWidth < 1024;
 
-          window.scrollTo({
-            top: y,
-            behavior: "smooth",
-          });
+          if (isMobile) {
+            el.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          } else {
+            const y = el.getBoundingClientRect().top + window.scrollY - 240;
+
+            window.scrollTo({
+              top: y,
+              behavior: "smooth",
+            });
+          }
 
           setTimeout(() => {
             setHighlightId(null);
@@ -452,7 +461,7 @@ export default function AdminDashboard() {
                     onSelectBooking={setSelectedBooking}
                   />
                 </div>
-                <div className="space-y-3 lg:hidden" ref={listRef}>
+                <div className="space-y-3 lg:hidden scroll-mt-40" ref={listRef}>
                   {filtered.map((b) => (
                     <BookingCardMobile
                       key={b.id}
