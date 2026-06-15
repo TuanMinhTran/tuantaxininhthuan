@@ -3,7 +3,11 @@ import BookingActions from "./BookingActions";
 
 const fmt = (iso) => new Date(iso).toLocaleString("vi-VN");
 
-export default function BookingTable({ bookings, highlightId, onSelectBooking }) {
+export default function BookingTable({
+  bookings,
+  highlightId,
+  onSelectBooking,
+}) {
   return (
     <div className="overflow-x-auto rounded-2xl border border-white/5 bg-[var(--surface)]">
       <table className="w-full text-sm">
@@ -22,8 +26,8 @@ export default function BookingTable({ bookings, highlightId, onSelectBooking })
         <tbody>
           {bookings.map((b) => (
             <tr
-              id={`desktop-booking-${b.id}`}
               key={b.id}
+              id={`desktop-booking-${b.id}`}
               onClick={(e) => {
                 if (
                   e.target.closest("button") ||
@@ -81,27 +85,30 @@ export default function BookingTable({ bookings, highlightId, onSelectBooking })
               <td className="px-4 py-4">
                 <StatusBadge status={b.status} />
               </td>
-              <td className="px-4 py-4 text-right">
-                <BookingActions booking={b} onEdit={onSelectBooking} />
+              <td
+                className="px-4 py-4 text-right"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <BookingActions booking={b} />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <style>{`
+        @keyframes flashRow {
+          0% {
+            background: rgba(250, 204, 21, 0.35);
+          }
+          100% {
+            background: rgba(250, 204, 21, 0.08);
+          }
+        }
+
+        .flash-booking {
+          animation: flashRow 1.2s ease;
+        }
+      `}</style>
     </div>
   );
 }
-<style>{`
-  @keyframes flashRow {
-    0% {
-      background: rgba(250, 204, 21, 0.35);
-    }
-    100% {
-      background: rgba(250, 204, 21, 0.08);
-    }
-  }
-
-  .flash-booking {
-    animation: flashRow 1.2s ease;
-  }
-`}</style>;

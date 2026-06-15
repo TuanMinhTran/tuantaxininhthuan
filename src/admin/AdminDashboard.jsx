@@ -78,8 +78,8 @@ export default function AdminDashboard() {
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("all");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [notifyOpen, setNotifyOpen] = useState(false);
   const [highlightId, setHighlightId] = useState(null);
+  const [notifyOpen, setNotifyOpen] = useState(false);
   const [allNotifyOpen, setAllNotifyOpen] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const audioRef = useRef(null);
@@ -161,6 +161,25 @@ export default function AdminDashboard() {
 
   const newCount = bookings.filter((b) => !b.seen).length;
 
+  const scrollToBooking = (booking) => {
+    if (!booking?.id) return;
+    setQuery("");
+    setStatus("all");
+    setHighlightId(booking.id);
+  };
+  useEffect(() => {
+    if (!highlightId) return;
+    const timeout = window.setTimeout(() => {
+      const isMobile = window.matchMedia("(max-width: 1023px)").matches;
+      const target = document.getElementById(
+        `${isMobile ? "mobile-booking" : "desktop-booking"}-${highlightId}`
+      );
+      target?.scrollIntoView({ behavior: "smooth", block: "center" });
+      window.setTimeout(() => setHighlightId(null), 1400);
+    }, 80);
+    return () => window.clearTimeout(timeout);
+  }, [highlightId]);
+
   const handleNotificationClick = (bookingId) => {
     const updated = bookings.map((b) =>
       b.id === bookingId ? { ...b, seen: true } : b
@@ -175,35 +194,35 @@ export default function AdminDashboard() {
 
     setHighlightId(bookingId);
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const el =
-          document.getElementById(`desktop-booking-${bookingId}`) ||
-          document.getElementById(`mobile-booking-${bookingId}`);
+    setTimeout(() => {
+      const el =
+        document.getElementById(`desktop-booking-${bookingId}`) ||
+        document.getElementById(`mobile-booking-${bookingId}`);
 
-        if (el) {
-          const isMobile = window.innerWidth < 1024;
+      if (!el) return;
 
-          if (isMobile) {
-            el.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          } else {
-            const y = el.getBoundingClientRect().top + window.scrollY - 240;
+      const isMobile = window.innerWidth < 1024;
 
-            window.scrollTo({
-              top: y,
-              behavior: "smooth",
-            });
-          }
+      if (isMobile) {
+        const y = el.getBoundingClientRect().top + window.pageYOffset - 120;
 
-          setTimeout(() => {
-            setHighlightId(null);
-          }, 2500);
-        }
-      });
-    });
+        window.scrollTo({
+          top: y,
+          behavior: "smooth",
+        });
+      } else {
+        const y = el.getBoundingClientRect().top + window.pageYOffset - 240;
+
+        window.scrollTo({
+          top: y,
+          behavior: "smooth",
+        });
+      }
+
+      setTimeout(() => {
+        setHighlightId(null);
+      }, 2500);
+    }, 350);
   };
 
   const filtered = useMemo(() => {
@@ -216,6 +235,7 @@ export default function AdminDashboard() {
       );
     });
   }, [bookings, query, status]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="flex">
@@ -458,16 +478,16 @@ export default function AdminDashboard() {
                   <BookingTable
                     bookings={filtered}
                     highlightId={highlightId}
-                    onSelectBooking={setSelectedBooking}
+                    onSelectBooking={scrollToBooking}
                   />
                 </div>
-                <div className="space-y-3 lg:hidden scroll-mt-40" ref={listRef}>
+                <div className="space-y-3 lg:hidden" ref={listRef}>
                   {filtered.map((b) => (
                     <BookingCardMobile
                       key={b.id}
                       booking={b}
-                      onSelectBooking={setSelectedBooking}
                       highlightId={highlightId}
+                      onSelectBooking={scrollToBooking}
                     />
                   ))}
                 </div>
