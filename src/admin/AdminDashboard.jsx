@@ -9,7 +9,12 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { getBookings, STATUS_LABELS } from "../lib/bookings";
+import {
+  getBookings,
+  STATUS_LABELS,
+  updateBooking,
+  markSeen,
+} from "../lib/bookings";
 import DashboardStats from "./DashboardStats";
 import BookingTable from "./BookingTable";
 import BookingCardMobile from "./BookingCardMobile";
@@ -20,7 +25,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { updateBooking } from "@/lib/bookings";
 
 function NavItem({ icon: Icon, active, children }) {
   return (
@@ -84,53 +88,53 @@ export default function AdminDashboard() {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const audioRef = useRef(null);
   const LAST_HEARD_KEY = "viettaxi_last_heard_booking";
-  const [audioUnlocked, setAudioUnlocked] = useState(false);
+  // const [audioUnlocked, setAudioUnlocked] = useState(false);
   const isCancelled = selectedBooking?.status === "cancelled";
   const listRef = useRef(null);
 
-  useEffect(() => {
-    const unlockAudio = async () => {
-      if (!audioRef.current) return;
+  // useEffect(() => {
+  //   const unlockAudio = async () => {
+  //     if (!audioRef.current) return;
 
-      try {
-        audioRef.current.muted = true;
+  //     try {
+  //       audioRef.current.muted = true;
 
-        await audioRef.current.play();
+  //       await audioRef.current.play();
 
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-        audioRef.current.muted = false;
+  //       audioRef.current.pause();
+  //       audioRef.current.currentTime = 0;
+  //       audioRef.current.muted = false;
 
-        setAudioUnlocked(true);
+  //       setAudioUnlocked(true);
 
-        console.log("Audio ready");
-      } catch (err) {
-        console.log("Audio unlock failed:", err);
-      }
-    };
+  //       console.log("Audio ready");
+  //     } catch (err) {
+  //       console.log("Audio unlock failed:", err);
+  //     }
+  //   };
 
-    unlockAudio();
-  }, []);
+  //   unlockAudio();
+  // }, []);
 
-  useEffect(() => {
-    if (!bookings.length || !audioUnlocked) return;
+  // useEffect(() => {
+  //   if (!bookings.length || !audioUnlocked) return;
 
-    const latestBookingId = bookings[0]?.id;
+  //   const latestBookingId = bookings[0]?.id;
 
-    const lastHeard = localStorage.getItem(LAST_HEARD_KEY);
+  //   const lastHeard = localStorage.getItem(LAST_HEARD_KEY);
 
-    if (latestBookingId !== lastHeard) {
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0;
+  //   if (latestBookingId !== lastHeard) {
+  //     if (audioRef.current) {
+  //       audioRef.current.currentTime = 0;
 
-        audioRef.current.play().catch((err) => {
-          console.log("Audio blocked:", err);
-        });
-      }
+  //       audioRef.current.play().catch((err) => {
+  //         console.log("Audio blocked:", err);
+  //       });
+  //     }
 
-      localStorage.setItem(LAST_HEARD_KEY, latestBookingId);
-    }
-  }, [bookings, audioUnlocked]);
+  //     localStorage.setItem(LAST_HEARD_KEY, latestBookingId);
+  //   }
+  // }, [bookings, audioUnlocked]);
 
   useEffect(() => {
     if (!allNotifyOpen) return;
@@ -148,15 +152,24 @@ export default function AdminDashboard() {
     };
   }, [allNotifyOpen]);
 
+  const fetchBookings = async () => {
+    try {
+      const data = await getBookings();
+
+      setBookings(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    const sync = () => setBookings(getBookings());
-    sync();
-    window.addEventListener("bookings:updated", sync);
-    window.addEventListener("storage", sync);
-    return () => {
-      window.removeEventListener("bookings:updated", sync);
-      window.removeEventListener("storage", sync);
-    };
+    fetchBookings();
+
+    const interval = setInterval(() => {
+      fetchBookings();
+    }, 3000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const newCount = bookings.filter((b) => !b.seen).length;
@@ -174,22 +187,26 @@ export default function AdminDashboard() {
     return () => window.clearTimeout(timeout);
   }, [highlightId]);
 
-  const handleNotificationClick = (bookingId) => {
-    const updated = bookings.map((b) =>
-      b.id === bookingId ? { ...b, seen: true } : b
-    );
+  const handleNotificationClick = async (bookingId) => {
+    try {
+      await markSeen(bookingId);
 
-    localStorage.setItem("viettaxi_bookings", JSON.stringify(updated));
+      const data = await getBookings();
 
-    setBookings(updated);
+      setBookings(data);
 
-    setQuery("");
-    setStatus("all");
+      setQuery("");
 
-    setNotifyOpen(false);
-    setAllNotifyOpen(false);
+      setStatus("all");
 
-    setHighlightId(bookingId);
+      setNotifyOpen(false);
+
+      setAllNotifyOpen(false);
+
+      setHighlightId(bookingId);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const filtered = useMemo(() => {
@@ -446,6 +463,7 @@ export default function AdminDashboard() {
                     bookings={filtered}
                     highlightId={highlightId}
                     onSelectBooking={setSelectedBooking}
+                    refreshBookings={fetchBookings}
                   />
                 </div>
                 <div className="space-y-3 lg:hidden" ref={listRef}>
@@ -455,6 +473,7 @@ export default function AdminDashboard() {
                       booking={b}
                       highlightId={highlightId}
                       onSelectBooking={setSelectedBooking}
+                      refreshBookings={fetchBookings}
                     />
                   ))}
                 </div>
@@ -682,9 +701,21 @@ export default function AdminDashboard() {
                 {selectedBooking.status !== "cancelled" && (
                   <div className="mt-2 flex justify-center">
                     <button
-                      onClick={() => {
-                        updateBooking(selectedBooking.id, selectedBooking);
-                        setSelectedBooking(null);
+                      onClick={async () => {
+                        try {
+                          await updateBooking(
+                            selectedBooking.id,
+                            selectedBooking
+                          );
+
+                          const data = await getBookings();
+
+                          setBookings(data);
+
+                          setSelectedBooking(null);
+                        } catch (err) {
+                          console.error(err);
+                        }
                       }}
                       className="
                         rounded-xl
@@ -705,7 +736,7 @@ export default function AdminDashboard() {
               </div>
             </div>
           )}
-          <audio ref={audioRef} src="/sounds/notification.mp3" preload="auto" />
+          {/* <audio ref={audioRef} src="/sounds/notification.mp3" preload="auto" /> */}
         </main>
       </div>
     </div>

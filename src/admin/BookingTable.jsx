@@ -7,6 +7,7 @@ export default function BookingTable({
   bookings,
   highlightId,
   onSelectBooking,
+  refreshBookings,
 }) {
   return (
     <div className="overflow-x-auto rounded-2xl border border-white/5 bg-[var(--surface)]">
@@ -49,7 +50,7 @@ export default function BookingTable({
                 }
               `}
             >
-              <td className="px-4 py-4 w-[110px]">
+              <td className="px-4 py-4 w-[130px]">
                 <div className="flex items-center gap-2 font-medium">
                   {b.name}
                   {!b.seen && (
@@ -86,10 +87,14 @@ export default function BookingTable({
                 <StatusBadge status={b.status} />
               </td>
               <td
-                className="px-4 py-4 text-right"
+                className="px-4 py-4 text-right min-w-[250px] lg:min-w-[300px]"
                 onClick={(e) => e.stopPropagation()}
               >
-                <BookingActions booking={b} onSelectBooking={onSelectBooking} />
+                <BookingActions
+                  booking={b}
+                  onSelectBooking={onSelectBooking}
+                  refreshBookings={refreshBookings}
+                />
               </td>
             </tr>
           ))}

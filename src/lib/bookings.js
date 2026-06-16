@@ -1,55 +1,102 @@
-const KEY = "viettaxi_bookings";
+import api from "./api";
 
-export function getBookings() {
-  if (typeof window === "undefined") return [];
-  try {
-    return JSON.parse(localStorage.getItem(KEY) || "[]");
-  } catch {
-    return [];
-  }
-}
-export function saveBookings(list) {
-  localStorage.setItem(KEY, JSON.stringify(list));
-  window.dispatchEvent(new Event("bookings:updated"));
-}
-export function addBooking(data) {
-  const list = getBookings();
-  const booking = {
-    id: crypto.randomUUID(),
-    createdAt: new Date().toISOString(),
-    status: "pending",
-    seen: false,
-    ...data,
-  };
-  list.unshift(booking);
-  saveBookings(list);
-  return booking;
-}
-export function updateBooking(id, patch) {
-  const list = getBookings().map((b) => (b.id === id ? { ...b, ...patch } : b));
-  saveBookings(list);
-}
-export function deleteBooking(id) {
-  saveBookings(getBookings().filter((b) => b.id !== id));
-}
-export function updateCancelBooking(id) {
-  const updated = getBookings().map((b) =>
-    b.id === id
-      ? {
-          ...b,
-          status: "cancelled",
-        }
-      : b
-  );
-
-  saveBookings(updated);
-}
-export function markAllSeen() {
-  saveBookings(getBookings().map((b) => ({ ...b, seen: true })));
-}
 export const STATUS_LABELS = {
   pending: "Chờ xác nhận",
   confirmed: "Đã xác nhận",
   completed: "Hoàn thành",
   cancelled: "Đã hủy",
 };
+
+export async function getBookings() {
+  const response = await api.get("/bookings");
+
+  return response.data.map((b) => ({
+    id: b.id,
+
+    name: b.name,
+    phone: b.phone,
+
+    pickup: b.pickup,
+    dropoff: b.dropoff,
+
+    date: b.date,
+    time: b.time,
+
+    vehicle: b.vehicle,
+    tripType: b.tripType,
+
+    note: b.note,
+
+    status: b.status,
+
+    seen: b.seen,
+
+    createdAt: b.createdAt,
+  }));
+}
+
+export async function createBooking(data) {
+  const response = await api.post("/bookings", {
+    name: data.name,
+    phone: data.phone,
+
+    pickup: data.pickup,
+    dropoff: data.dropoff,
+
+    date: data.date,
+    time: data.time,
+
+    vehicle: data.vehicle,
+    tripType: data.tripType,
+
+    note: data.note,
+  });
+
+  return response.data;
+}
+
+export async function updateBooking(id, data) {
+  const response = await api.put(`/bookings/${id}`, {
+    name: data.name,
+    phone: data.phone,
+
+    pickup: data.pickup,
+    dropoff: data.dropoff,
+
+    date: data.date,
+    time: data.time,
+
+    vehicle: data.vehicle,
+    tripType: data.tripType,
+
+    note: data.note,
+  });
+
+  return response.data;
+}
+
+export async function deleteBooking(id) {
+  await api.delete(`/bookings/${id}`);
+}
+
+export async function updateCancelBooking(id) {
+  const response = await api.patch(`/bookings/${id}/cancel`);
+
+  return response.data;
+}
+
+export async function markSeen(id) {
+  const response = await api.patch(`/bookings/${id}/seen`);
+
+  return response.data;
+}
+
+export async function markAllSeen() {
+  await api.patch("/bookings/seen-all");
+}
+
+export async function updateBookingStatus(id, status) {
+  const response = await api.patch(`/bookings/${id}/status?status=${status}`);
+
+  return response.data;
+}

@@ -1,23 +1,23 @@
 import { Check, CheckCheck, Trash2, XCircle, Pencil } from "lucide-react";
 
 import {
-  updateBooking,
   deleteBooking,
   updateCancelBooking,
-} from "@/lib/bookings";
+  updateBooking,
+  updateBookingStatus,
+} from "../lib/bookings";
 
-export default function BookingActions({ booking, onEdit, onSelectBooking }) {
+export default function BookingActions({ booking, onEdit, onSelectBooking, refreshBookings }) {
   return (
-    <div className="flex flex-wrap gap-2 items-center">
+    <div className="flex lg:flex-nowrap gap-2 items-center">
       {booking.status === "pending" && (
         <button
-          onClick={(e) => {
+          onClick={async (e) => {
             e.stopPropagation();
-            updateBooking(booking.id, {
-              status: "confirmed",
-            });
+            await updateBookingStatus(booking.id, "confirmed");
+            await refreshBookings();
           }}
-          className="inline-flex items-center gap-1 rounded-lg border border-blue-500/30 bg-blue-500/10 px-3 py-1.5 text-xs font-medium text-blue-400 hover:bg-blue-500/20"
+          className="inline-flex items-center gap-1 whitespace-nowrap rounded-lg border border-blue-500/30 bg-blue-500/10 px-3 py-1.5 text-xs font-medium text-blue-400 hover:bg-blue-500/20"
         >
           <Check className="h-3.5 w-3.5" />
           Xác nhận
@@ -26,13 +26,12 @@ export default function BookingActions({ booking, onEdit, onSelectBooking }) {
 
       {booking.status !== "completed" && booking.status !== "cancelled" && (
         <button
-          onClick={(e) => {
+          onClick={async (e) => {
             e.stopPropagation();
-            updateBooking(booking.id, {
-              status: "completed",
-            });
+            await updateBookingStatus(booking.id, "completed");
+            await refreshBookings();
           }}
-          className="inline-flex items-center gap-1 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-400 hover:bg-emerald-500/20"
+          className="inline-flex items-center gap-1 whitespace-nowrap rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-400 hover:bg-emerald-500/20"
         >
           <CheckCheck className="h-3.5 w-3.5" />
           Hoàn thành
@@ -43,7 +42,7 @@ export default function BookingActions({ booking, onEdit, onSelectBooking }) {
           onClick={(e) => {
             e.stopPropagation();
             onSelectBooking?.(booking);
-            onEdit(booking);
+            onEdit?.(booking);
           }}
           className="inline-flex items-center gap-1 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-3 py-1.5 text-xs font-medium text-yellow-400 hover:bg-yellow-500/20"
         >
@@ -54,10 +53,11 @@ export default function BookingActions({ booking, onEdit, onSelectBooking }) {
       {/* NÚT HỦY */}
       {booking.status !== "cancelled" ? (
         <button
-          onClick={(e) => {
+          onClick={async (e) => {
             e.stopPropagation();
             if (confirm("Hủy booking này?")) {
-              updateCancelBooking(booking.id);
+              await updateCancelBooking(booking.id);
+              await refreshBookings();
             }
           }}
           className="inline-flex items-center gap-1 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-xs font-medium text-red-400 hover:bg-red-500/20"
@@ -67,10 +67,11 @@ export default function BookingActions({ booking, onEdit, onSelectBooking }) {
         </button>
       ) : (
         <button
-          onClick={(e) => {
+          onClick={async (e) => {
             e.stopPropagation();
             if (confirm("Xóa vĩnh viễn booking này?")) {
-              deleteBooking(booking.id);
+              await deleteBooking(booking.id);
+              await refreshBookings();
             }
           }}
           className="inline-flex items-center gap-1 rounded-lg border border-red-600/30 bg-red-600/10 px-3 py-1.5 text-xs font-medium text-red-500 hover:bg-red-600/20"

@@ -35,7 +35,7 @@ export default function HomePage() {
       setOpenPricing(true);
     }
   }, [location.search]);
-  
+
   return (
     <div>
       <VietTaxiNavbar setOpenPricing={setOpenPricing} />

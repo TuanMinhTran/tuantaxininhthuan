@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { addBooking } from "../lib/bookings";
+import { createBooking } from "../lib/bookings";
 
 export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
   const [submitting, setSubmitting] = useState(false);
@@ -41,7 +41,7 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
   if (!open) return null;
   const update = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setError("");
@@ -68,29 +68,29 @@ export default function BookingPopup({ open, onClose, onSubmit, setToast }) {
 
     setSubmitting(true);
 
-    setTimeout(() => {
-      try {
-        addBooking(form);
+    try {
+      await createBooking(form);
 
-        setSubmitting(false);
+      setSubmitting(false);
 
-        setToast({
-          type: "success",
-          message: "Đặt xe thành công! Chúng tôi sẽ liên hệ sớm nhất.",
-        });
+      setToast({
+        type: "success",
+        message: "Đặt xe thành công! Chúng tôi sẽ liên hệ sớm nhất.",
+      });
 
-        onSubmit?.(form);
+      onSubmit?.(form);
 
-        handleClose();
-      } catch (err) {
-        setSubmitting(false);
+      handleClose();
+    } catch (err) {
+      console.error(err);
 
-        setToast({
-          type: "error",
-          message: "Có lỗi xảy ra. Vui lòng thử lại.",
-        });
-      }
-    }, 600);
+      setSubmitting(false);
+
+      setToast({
+        type: "error",
+        message: "Có lỗi xảy ra. Vui lòng thử lại.",
+      });
+    }
   };
   return (
     <div
